@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">ShinyDex</string>
+    <string name="title_home">Home</string>
+    <string name="title_active_hunts">Active Hunts</string>
+    <string name="title_shiny_dex">Shiny Dex</string>
+    <string name="title_new_hunt">New Hunt</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+</resources>

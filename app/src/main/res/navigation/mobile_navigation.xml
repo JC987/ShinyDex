@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_shiny_dex">
+
+    <fragment
+        android:id="@+id/navigation_active_hunts"
+        android:name="com.orangeanchorapps.shinydex.ui.active_hunts.ActiveHuntsFragment"
+        android:label="@string/title_active_hunts"
+        tools:layout="@layout/fragment_active_hunts" />
+
+    <fragment
+        android:id="@+id/navigation_shiny_dex"
+        android:name="com.orangeanchorapps.shinydex.ui.shiny_dex.ShinyDexFragment"
+        android:label="@string/title_shiny_dex"
+        tools:layout="@layout/fragment_shiny_dex" />
+
+    <fragment
+        android:id="@+id/navigation_new_hunt"
+        android:name="com.orangeanchorapps.shinydex.ui.new_hunts.NewHuntFragment"
+        android:label="@string/title_new_hunt"
+        tools:layout="@layout/fragment_new_hunt" />
+</navigation>

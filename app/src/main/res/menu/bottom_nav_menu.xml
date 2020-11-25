@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_active_hunts"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/title_active_hunts" />
+
+    <item
+        android:id="@+id/navigation_shiny_dex"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="@string/title_shiny_dex" />
+
+    <item
+        android:id="@+id/navigation_new_hunt"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="@string/title_new_hunt" />
+
+</menu>
