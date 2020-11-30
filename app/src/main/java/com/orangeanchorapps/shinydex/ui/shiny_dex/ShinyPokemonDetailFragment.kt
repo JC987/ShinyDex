@@ -1,0 +1,46 @@
+package com.orangeanchorapps.shinydex.ui.shiny_dex
+
+import android.net.Uri
+import android.os.Bundle
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import com.orangeanchorapps.shinydex.R
+import com.orangeanchorapps.shinydex.ui.shiny_dex.ShinyDexFragment
+import com.orangeanchorapps.shinydex.ui.shiny_dex.ShinyDexViewModel
+
+class ShinyPokemonDetailFragment:Fragment() {
+    private val TAG = "ShinyDex"
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val shinyDexViewModel = ViewModelProvider(requireParentFragment()).get(ShinyDexViewModel::class.java)
+
+        val root = inflater.inflate(R.layout.fragment_shiny_pokemon_details, container, false)
+        val name = root.findViewById<TextView>(R.id.shinyPokemonName)
+        val sprite = root.findViewById<ImageView>(R.id.shinySprite)
+        name.text = shinyDexViewModel.shinyName.value
+        shinyDexViewModel.shinyName.observe(viewLifecycleOwner, {
+            name.text = it
+        })
+        shinyDexViewModel.spriteBitMap.observe(viewLifecycleOwner, {
+            Log.d(TAG, "onCreateView: sprite uri observed")
+            sprite.setImageURI(null)
+            sprite.setImageBitmap(it)
+        })
+        shinyDexViewModel.getTang()
+        shinyDexViewModel.getTangImage()
+
+
+
+
+        return root
+
+    }
+}

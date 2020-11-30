@@ -22,4 +22,10 @@
         android:name="com.orangeanchorapps.shinydex.ui.new_hunts.NewHuntFragment"
         android:label="@string/title_new_hunt"
         tools:layout="@layout/fragment_new_hunt" />
+
+    <fragment
+        android:id="@+id/navigation_shiny_pokemon"
+        android:name="com.orangeanchorapps.shinydex.ui.shiny_dex.ShinyPokemonDetailFragment"
+        android:label="Completed Shiny Pokemon"
+        tools:layout="@layout/fragment_shiny_pokemon_details" />
 </navigation>
