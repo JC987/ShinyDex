@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
@@ -25,15 +26,25 @@ class ShinyPokemonDetailFragment:Fragment() {
         val root = inflater.inflate(R.layout.fragment_shiny_pokemon_details, container, false)
         val name = root.findViewById<TextView>(R.id.shinyPokemonName)
         val sprite = root.findViewById<ImageView>(R.id.shinySprite)
+        val back = root.findViewById<Button>(R.id.detailsBackButton)
+
         name.text = shinyDexViewModel.shinyName.value
         shinyDexViewModel.shinyName.observe(viewLifecycleOwner, {
             name.text = it
         })
+
+        back.setOnClickListener {
+            val fragment = ShinyDexFragment()
+            val manager = parentFragmentManager
+            manager.beginTransaction().replace(R.id.nav_host_fragment,fragment).commit()
+        }
+
         shinyDexViewModel.spriteBitMap.observe(viewLifecycleOwner, {
             Log.d(TAG, "onCreateView: sprite uri observed")
             sprite.setImageURI(null)
             sprite.setImageBitmap(it)
         })
+
         shinyDexViewModel.getTang()
         shinyDexViewModel.getTangImage()
 
