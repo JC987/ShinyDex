@@ -24,9 +24,9 @@ class ShinyPokemonDetailFragment:Fragment() {
         val shinyDexViewModel = ViewModelProvider(requireParentFragment()).get(ShinyDexViewModel::class.java)
 
         val root = inflater.inflate(R.layout.fragment_shiny_pokemon_details, container, false)
-        val name = root.findViewById<TextView>(R.id.shinyPokemonName)
-        val sprite = root.findViewById<ImageView>(R.id.shinySprite)
-        val back = root.findViewById<Button>(R.id.detailsBackButton)
+        val name = root.findViewById<TextView>(R.id.tvShinyPokemonName)
+        val sprite = root.findViewById<ImageView>(R.id.ivShinySprite)
+        val back = root.findViewById<Button>(R.id.btnBackShinyDetails)
 
         name.text = shinyDexViewModel.shinyName.value
         shinyDexViewModel.shinyName.observe(viewLifecycleOwner, {

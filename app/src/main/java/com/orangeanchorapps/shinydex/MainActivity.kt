@@ -1,6 +1,7 @@
 package com.orangeanchorapps.shinydex
 
 import android.os.Bundle
+import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -22,5 +23,9 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_active_hunts, R.id.navigation_shiny_dex, R.id.navigation_new_hunt, R.id.navigation_shiny_pokemon))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
     }
 }
