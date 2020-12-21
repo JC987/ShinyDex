@@ -12,6 +12,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.orangeanchorapps.shinydex.MainActivity
 import com.orangeanchorapps.shinydex.R
 import com.orangeanchorapps.shinydex.ui.new_hunts.NewHuntFragment
 import okhttp3.*
@@ -40,7 +41,8 @@ class ShinyDexFragment : Fragment() {
 
         val listView: ListView = root.findViewById(R.id.shinyDexListView)
 
-        var adapter = ArrayAdapter<String>(root.context,R.layout.support_simple_spinner_dropdown_item, listOf("Tangela","other","third"))
+
+        var adapter = ArrayAdapter<String>(root.context,R.layout.support_simple_spinner_dropdown_item, MainActivity.dex.getCompletedHuntsNames())
         //val btn: Button = root.findViewById(R.id.testBtn)
         listView.adapter = adapter
 

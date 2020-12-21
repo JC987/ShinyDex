@@ -8,8 +8,15 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.orangeanchorapps.shinydex.classes.Pokemon
+import com.orangeanchorapps.shinydex.classes.ShinyDex
+import com.orangeanchorapps.shinydex.classes.ShinyHunt
 
 class MainActivity : AppCompatActivity() {
+
+    companion object{
+        val dex = ShinyDex()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,9 +30,14 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_active_hunts, R.id.navigation_shiny_dex, R.id.navigation_new_hunt, R.id.navigation_shiny_pokemon))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        dex.addHunt(ShinyHunt(Pokemon("Tangela"),162,true))
+        dex.addHunt(ShinyHunt(Pokemon("Squirtle"),312,false))
+
     }
 
     override fun onBackPressed() {
         super.onBackPressed()
     }
+
 }

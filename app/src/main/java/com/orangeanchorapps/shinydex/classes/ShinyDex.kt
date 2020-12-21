@@ -21,4 +21,39 @@ class ShinyDex(private val dex: ArrayList<ShinyHunt> = ArrayList<ShinyHunt>()) {
         return dex[index]
     }
 
+    fun getCompletedHunts():List<ShinyHunt>{
+        val tmp = ArrayList<ShinyHunt>()
+        for(item:ShinyHunt in dex){
+            if(item.isCompleted)
+                tmp.add(item)
+        }
+        return tmp
+    }
+
+    fun getCompletedHuntsNames():List<String>{
+        val tmp = ArrayList<String>()
+        for(item:ShinyHunt in dex){
+            if(item.isCompleted)
+                tmp.add(item.pokemon.name)
+        }
+        return tmp
+    }
+
+    fun getActiveHunts():ArrayList<ShinyHunt>{
+        val tmp = ArrayList<ShinyHunt>()
+        for(item:ShinyHunt in dex){
+            if(!item.isCompleted)
+                tmp.add(item)
+        }
+        return tmp
+    }
+
+    fun getActiveHuntsName():ArrayList<String>{
+        val tmp = ArrayList<String>()
+        for(item:ShinyHunt in dex){
+            if(!item.isCompleted)
+                tmp.add(item.pokemon.name + " ~ (Encounters: " + item.getEncounters() + ")")
+        }
+        return tmp
+    }
 }
