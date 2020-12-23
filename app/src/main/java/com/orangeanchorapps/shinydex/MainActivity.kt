@@ -1,6 +1,11 @@
 package com.orangeanchorapps.shinydex
 
+import android.content.ContentResolver
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
+import android.os.Message
+import android.provider.MediaStore
 import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
@@ -11,8 +16,9 @@ import androidx.navigation.ui.setupWithNavController
 import com.orangeanchorapps.shinydex.classes.Pokemon
 import com.orangeanchorapps.shinydex.classes.ShinyDex
 import com.orangeanchorapps.shinydex.classes.ShinyHunt
+import com.orangeanchorapps.shinydex.ui.search_pokemon.SearchPokemonFragment
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), com.orangeanchorapps.shinydex.interfaces.Message {
 
     companion object{
         val dex = ShinyDex()
@@ -22,7 +28,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
-
         val navController = findNavController(R.id.nav_host_fragment)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -40,4 +45,6 @@ class MainActivity : AppCompatActivity() {
         super.onBackPressed()
     }
 
+    override fun setMessage(i:Int) {
+    }
 }

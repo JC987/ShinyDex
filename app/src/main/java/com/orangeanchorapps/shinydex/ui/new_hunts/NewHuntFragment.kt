@@ -27,13 +27,20 @@ class NewHuntFragment : Fragment() {
         //val textView: TextView = root.findViewById(R.id.text_notifications)
         val btn = root.findViewById<Button>(R.id.btnSearchRandomPokemon)
         btn.setOnClickListener {
-            val fragment = SearchPokemonFragment()
-            val manager = parentFragmentManager
-            manager.beginTransaction().replace(R.id.nav_host_fragment,fragment).addToBackStack(null).commit()
+            gotoSearchFragment()
         }
         newHuntViewModel.text.observe(viewLifecycleOwner, Observer {
             //textView.text = it
         })
         return root
+    }
+
+    private fun gotoSearchFragment() {
+        val fragment = SearchPokemonFragment()
+        val manager = parentFragmentManager
+        val bundle:Bundle = Bundle()
+        bundle.putInt("search_method",2)
+        fragment.setBundle(bundle)
+        manager.beginTransaction().replace(R.id.nav_host_fragment,fragment).addToBackStack(null).commit()
     }
 }
