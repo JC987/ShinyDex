@@ -8,10 +8,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
@@ -29,7 +26,7 @@ class ActiveHuntDetailsFragment: Fragment() {
     ): View? {
         val root = inflater.inflate(R.layout.fragment_active_hunt_details, container, false)
         c = root.context
-        val iv = root.findViewById<ImageView>(R.id.ivSpriteActiveHunt)
+        val iv = root.findViewById<ImageView>(R.id.ivShinySprite)
         val activeHuntDetailsViewModel =
         ViewModelProvider(this).get(ActiveHuntDetailsViewModel::class.java)
 
@@ -38,6 +35,13 @@ class ActiveHuntDetailsFragment: Fragment() {
         //val d = BitmapDrawable.createFromPath(otherPath.toString())
         val b = BitmapFactory.decodeResource(resources,R.drawable.shiny_squirtle_api)
         val p = Pokemon("name", b)
+
+        val pb = root.findViewById<ProgressBar>(R.id.progressBar)
+        pb.visibility = View.GONE
+        /*val spinner = root.findViewById<Spinner>(R.id.spinner)
+
+        val adapter = ArrayAdapter<String>(root.context, R.layout.support_simple_spinner_dropdown_item, listOf("Choose a hunting method", "Random Encounters", "Masuda", "Chaining", "Raid dens"))
+        spinner.adapter = adapter*/
         val button = root.findViewById<Button>(R.id.btnBackActiveHunt)
         button.setOnClickListener {
             val manager = parentFragmentManager

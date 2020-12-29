@@ -6,10 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -27,7 +24,7 @@ class ShinyPokemonDetailFragment:Fragment() {
         val name = root.findViewById<TextView>(R.id.tvShinyPokemonName)
         val sprite = root.findViewById<ImageView>(R.id.ivShinySprite)
         val back = root.findViewById<Button>(R.id.btnBackShinyDetails)
-
+        val pb = root.findViewById<ProgressBar>(R.id.progressBar)
         name.text = shinyDexViewModel.shinyName.value
         shinyDexViewModel.shinyName.observe(viewLifecycleOwner, {
             name.text = it
@@ -41,6 +38,8 @@ class ShinyPokemonDetailFragment:Fragment() {
 
         shinyDexViewModel.spriteBitMap.observe(viewLifecycleOwner, {
             Log.d(TAG, "onCreateView: sprite uri observed")
+            if (it != null)
+                pb.visibility = View.GONE
             sprite.setImageURI(null)
             sprite.setImageBitmap(it)
         })

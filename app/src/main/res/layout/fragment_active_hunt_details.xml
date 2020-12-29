@@ -5,91 +5,89 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tvNameActiveHunt"
+
+    <include
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="sample name!"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/includedFragment"
+        layout="@layout/fragment_pokemon_details"
         app:layout_constraintStart_toStartOf="parent"
-        />
-
-    <ImageView
-        android:layout_width="256dp"
-        android:layout_height="256dp"
-        android:id="@+id/ivSpriteActiveHunt"
-        android:scaleType="centerCrop"
-        android:layout_gravity="center"
-        android:src="@mipmap/ic_launcher"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tvEncounterActiveHunt"
-        android:text="Total encounters : 9001"
-        android:textSize="18sp"
-        android:gravity="center"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="@id/ivSpriteActiveHunt"
-        app:layout_constraintStart_toStartOf="parent"
-        />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="32dp"
-        android:gravity="center"
-        android:id="@+id/linearLayoutEncounterButtons"
-        app:layout_constraintTop_toBottomOf="@id/tvEncounterActiveHunt"
-        app:layout_constraintStart_toStartOf="parent">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:id="@+id/btnSubOne"
-            android:text="- 1"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:id="@+id/btnAddOne"
-            android:text="+ 1"/>
-    </LinearLayout>
+<!--
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinner"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/includedFragment"/>
+-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvEncounterActiveHunt"
+                android:text="@string/total_encounters"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toBottomOf="@id/includedFragment"
+                app:layout_constraintStart_toStartOf="parent"
+                />
 
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnConfirmHunt"
-        android:text="Finish hunt!"
-        android:backgroundTint="#4CAF50"
-        android:layout_marginBottom="64dp"
-        android:layout_marginTop="16dp"
-        android:layout_gravity="center"
-        app:layout_constraintTop_toBottomOf="@id/linearLayoutEncounterButtons"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:id="@+id/linearLayoutEncounterButtons"
+                app:layout_constraintTop_toBottomOf="@id/tvEncounterActiveHunt"
+                app:layout_constraintBottom_toBottomOf="@id/btnConfirmHunt"
+                app:layout_constraintStart_toStartOf="parent">
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:id="@+id/btnSubOne"
+                    android:text="- 1"/>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:id="@+id/btnAddOne"
+                    android:text="+ 1"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btnBackActiveHunt"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/back"/>
+            </LinearLayout>
 
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnBackActiveHunt"
-        android:text="Back!"
-        android:layout_marginBottom="64dp"
-        android:layout_marginTop="16dp"
-        android:layout_gravity="center"
-        app:layout_constraintTop_toBottomOf="@id/btnConfirmHunt"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnConfirmHunt"
+                android:text="@string/finish_hunt"
+                android:backgroundTint="#4CAF50"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="64dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+
+
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,7 +18,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Search for pokemon by name"
+            android:hint="@string/search_for_pokemon_by_name"
             android:layout_weight="1"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
@@ -27,7 +27,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Search\nName"
+            android:text="@string/search_name"
             android:id="@+id/btnSearchByName"
             android:layout_marginEnd="8dp"/>
     </LinearLayout>
@@ -45,7 +45,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Search for pokemon by ID"
+            android:hint="@string/search_for_pokemon_by_id"
             android:layout_weight="1"
             android:id="@+id/etPokemonId"
             android:inputType="number"
@@ -55,7 +55,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Search\nID"
+            android:text="@string/search_id"
             android:id="@+id/btnSearchById"
             android:layout_marginEnd="8dp"/>
     </LinearLayout>
@@ -64,7 +64,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Search For Random Pokemon"
+        android:text="@string/search_for_random_pokemon"
         android:id="@+id/btnSearchRandomPokemon"
         android:backgroundTint="#4CAF50"
         android:layout_marginTop="64dp"

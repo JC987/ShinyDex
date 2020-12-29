@@ -27,13 +27,11 @@ class SearchPokemonFragment: Fragment() {
         val i = bundle.getInt("search_method",0)
 
         searchPokemonViewModel = ViewModelProvider(this).get(SearchPokemonViewModel::class.java)
-        root = inflater.inflate(R.layout.fragement_search_pokemon,container,false)
+        root = inflater.inflate(R.layout.fragment_search_pokemon,container,false)
         val iv = root.findViewById<ImageView>(R.id.ivShinySprite)
         tv = root.findViewById<TextView>(R.id.tvShinyPokemonName)
-        val tv2 = root.findViewById<TextView>(R.id.tvEncountersShinyDetails)
-        tv2.visibility = View.GONE
-        val btnAdd = root.findViewById<Button>(R.id.btnBackShinyDetails)
-        btnAdd.text = "Start hunt"
+        val btnAdd = root.findViewById<Button>(R.id.btnAddRandomPokemon)
+
         pb = root.findViewById<ProgressBar>(R.id.progressBar)
         btnReload = root.findViewById<Button>(R.id.btnReloadSearch)
         btnReload.setOnClickListener {

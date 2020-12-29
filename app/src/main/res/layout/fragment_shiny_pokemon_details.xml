@@ -6,61 +6,35 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tvShinyPokemonName"
+    <include layout="@layout/fragment_pokemon_details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="sample name!"
-        android:layout_marginTop="16dp"
-        android:textAlignment="center"
-        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        />
-
-    <ImageView
-        android:layout_width="256dp"
-        android:layout_height="256dp"
-        android:id="@+id/ivShinySprite"
-        android:scaleType="centerCrop"
-        android:layout_gravity="center"
-        android:layout_marginTop="32dp"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        android:id="@+id/includedFragment"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Total encounters : 9001"
+        android:text="@string/total_encounters"
         android:textSize="18sp"
         android:gravity="center"
         android:id="@+id/tvEncountersShinyDetails"
         android:layout_marginBottom="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/ivShinySprite"
+        app:layout_constraintBottom_toBottomOf="@id/includedFragment"
         />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btnBackShinyDetails"
-        android:text="Back!"
+        android:text="@string/back"
         android:layout_marginTop="16dp"
         android:layout_gravity="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvEncountersShinyDetails"/>
-
-    <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/progressBar"
-        app:layout_constraintStart_toStartOf="@id/ivShinySprite"
-        app:layout_constraintTop_toTopOf="@id/ivShinySprite"
-        app:layout_constraintEnd_toEndOf="@id/ivShinySprite"
-        app:layout_constraintBottom_toBottomOf="@id/ivShinySprite"/>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

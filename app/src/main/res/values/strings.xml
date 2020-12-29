@@ -6,7 +6,18 @@
     <string name="title_new_hunt">New Hunt</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-    <string name = "failed_to_load_pokemon">"Failed to load pokemon\nCheck your connection\nand try again"</string>
-    <string name = "failed_to_load_sprite">"Failed to load image\nCheck your connection\nand try again"</string>
-    <string name="loading">loading...</string>
+    <string name = "failed_to_load_pokemon">"Failed to load pokemon.\nCheck your connection\nand try again"</string>
+    <string name = "failed_to_load_sprite">"Failed to load image.\nCheck your connection\nand try again"</string>
+    <string name="loading">loading…</string>
+    <string name="start_hunt">Start Hunt</string>
+    <string name="total_encounters">Total encounters :</string>
+    <string name="back">Back!</string>
+    <string name="search_for_pokemon_by_name">Search for pokemon by name</string>
+    <string name="search_name">Search\nName</string>
+    <string name="search_for_pokemon_by_id">Search for pokemon by ID</string>
+    <string name="search_id">Search\nID</string>
+    <string name="search_for_random_pokemon">Search For Random Pokemon</string>
+    <string name="enter_a_number">Enter a number!</string>
+    <string name="reload">Reload!</string>
+    <string name="finish_hunt">Finish hunt!</string>
 </resources>
