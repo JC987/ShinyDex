@@ -42,7 +42,7 @@ class ShinyDexFragment : Fragment() {
         val listView: ListView = root.findViewById(R.id.shinyDexListView)
 
 
-        var adapter = ArrayAdapter<String>(root.context,R.layout.support_simple_spinner_dropdown_item, MainActivity.dex.getCompletedHuntsNames())
+        var adapter = ArrayAdapter<String>(root.context,R.layout.layout_item, MainActivity.dex.getCompletedHuntsNames())
         //val btn: Button = root.findViewById(R.id.testBtn)
         listView.adapter = adapter
 

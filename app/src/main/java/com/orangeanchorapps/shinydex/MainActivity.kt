@@ -37,6 +37,9 @@ class MainActivity : AppCompatActivity(), com.orangeanchorapps.shinydex.interfac
         navView.setupWithNavController(navController)
 
         dex.addHunt(ShinyHunt(Pokemon("Tangela"),162,true))
+        dex.addHunt(ShinyHunt(Pokemon("Tangela2"),162,true))
+        dex.addHunt(ShinyHunt(Pokemon("Tangela3"),162,true))
+        dex.addHunt(ShinyHunt(Pokemon("Tangela4"),162,true))
         dex.addHunt(ShinyHunt(Pokemon("Squirtle"),312,false))
 
     }

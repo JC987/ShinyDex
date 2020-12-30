@@ -29,7 +29,7 @@ class ActiveHuntsFragment : Fragment() {
         val root = inflater.inflate(R.layout.fragment_active_hunts, container, false)
         val textView: TextView = root.findViewById(R.id.text_home)
         val listView: ListView = root.findViewById(R.id.activeHuntListView)
-        val adapter = ArrayAdapter<String>(root.context, R.layout.support_simple_spinner_dropdown_item, MainActivity.dex.getActiveHuntsName())
+        val adapter = ArrayAdapter<String>(root.context, R.layout.layout_item, MainActivity.dex.getActiveHuntsName())
         activeHuntsViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
