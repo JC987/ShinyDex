@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.DialogInterface
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,8 @@ import com.google.android.material.snackbar.Snackbar
 import com.orangeanchorapps.shinydex.MainActivity
 import com.orangeanchorapps.shinydex.R
 import com.orangeanchorapps.shinydex.classes.Pokemon
+import com.orangeanchorapps.shinydex.classes.ShinyHunt
+import com.orangeanchorapps.shinydex.interfaces.Message
 
 
 class ActiveHuntDetailsFragment: Fragment() {
@@ -27,13 +30,16 @@ class ActiveHuntDetailsFragment: Fragment() {
         val root = inflater.inflate(R.layout.fragment_active_hunt_details, container, false)
         c = root.context
         val iv = root.findViewById<ImageView>(R.id.ivShinySprite)
+        val tvName = root.findViewById<TextView>(R.id.tvShinyPokemonName)
         val activeHuntDetailsViewModel =
         ViewModelProvider(this).get(ActiveHuntDetailsViewModel::class.java)
 
         (activity as MainActivity).showBackButton()
+        val index = (activity as Message).receiveMessage()
+        val dex = MainActivity.dex
+        Log.d("ShinyDex", "onCreateView: $index")
 
-        val b = BitmapFactory.decodeResource(resources,R.drawable.shiny_squirtle_api)
-        val p = Pokemon("name", b)
+        val hunt: ShinyHunt = dex.getActiveHunts().get(index)
 
         val pb = root.findViewById<ProgressBar>(R.id.progressBar)
         pb.visibility = View.GONE
@@ -50,16 +56,24 @@ class ActiveHuntDetailsFragment: Fragment() {
             val b = activeHuntDetailsViewModel.decrementEncounters()
             if(!b)
                 Snackbar.make(it,"Can't have negative encounters",Snackbar.LENGTH_SHORT).show()
+
         }
         tvEncounter.setOnClickListener {
             setEncounterDialog(it,activeHuntDetailsViewModel::setEncounters)
 
         }
 
+        activeHuntDetailsViewModel.encounters.observe(viewLifecycleOwner, {
+            hunt.encounters = it
+        })
+
         activeHuntDetailsViewModel.text.observe(viewLifecycleOwner,{
             tvEncounter.text = it
         })
-        iv.setImageBitmap(p.sprite)
+
+        tvName.text = hunt.pokemon.name
+        iv.setImageBitmap(hunt.pokemon.sprite)
+        activeHuntDetailsViewModel.setEncounters(hunt.encounters)
         return root
     }
 

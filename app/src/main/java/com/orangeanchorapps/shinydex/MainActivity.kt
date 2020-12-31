@@ -1,6 +1,7 @@
 package com.orangeanchorapps.shinydex
 
 
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
@@ -23,6 +24,8 @@ class MainActivity : AppCompatActivity(), com.orangeanchorapps.shinydex.interfac
     }
     private var sab: ActionBar? = null
 
+    override var messageInt: Int = -1
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -37,7 +40,10 @@ class MainActivity : AppCompatActivity(), com.orangeanchorapps.shinydex.interfac
         dex.addHunt(ShinyHunt(Pokemon("Tangela2"),162,true))
         dex.addHunt(ShinyHunt(Pokemon("Tangela3"),162,true))
         dex.addHunt(ShinyHunt(Pokemon("Tangela4"),162,true))
-        dex.addHunt(ShinyHunt(Pokemon("Squirtle"),312,false))
+
+        val bitmap = BitmapFactory.decodeResource(resources,R.drawable.shiny_squirtle_api)
+
+        dex.addHunt(ShinyHunt(Pokemon("Squirtle", bitmap),312,false))
 
         sab = supportActionBar
     }
@@ -69,5 +75,10 @@ class MainActivity : AppCompatActivity(), com.orangeanchorapps.shinydex.interfac
     }
 
     override fun setMessage(i:Int) {
+        messageInt = i
+    }
+
+    override fun receiveMessage(): Int {
+        return messageInt
     }
 }

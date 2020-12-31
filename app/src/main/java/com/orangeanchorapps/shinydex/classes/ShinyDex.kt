@@ -52,7 +52,7 @@ class ShinyDex(private val dex: ArrayList<ShinyHunt> = ArrayList<ShinyHunt>()) {
         val tmp = ArrayList<String>()
         for(item:ShinyHunt in dex){
             if(!item.isCompleted)
-                tmp.add(item.pokemon.name + " ~ (Encounters: " + item.getEncounters() + ")")
+                tmp.add(item.pokemon.name + " ~ (Encounters: " + item.encounters + ")")
         }
         return tmp
     }

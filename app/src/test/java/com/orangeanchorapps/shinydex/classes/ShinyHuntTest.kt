@@ -25,7 +25,7 @@ class ShinyHuntTest {
     fun test1(){
         hunt.changeEncounters(true)
         hunt.changeEncounters(true)
-        assertEquals(2,hunt.getEncounters())
+        assertEquals(2,hunt.encounters)
     }
     //Purpose: to test changing encounters with adding and removing
     @Test
@@ -33,14 +33,14 @@ class ShinyHuntTest {
         hunt.changeEncounters(true)
         hunt.changeEncounters(true)
         hunt.changeEncounters(false)
-        assertEquals(1,hunt.getEncounters())
+        assertEquals(1,hunt.encounters)
     }
     //Purpose: to test subtracting more times than encounters
     @Test
     fun test3(){
         hunt.changeEncounters(false)
         hunt.changeEncounters(false)
-        assertEquals(0,hunt.getEncounters())
+        assertEquals(0,hunt.encounters)
     }
 
     //Purpose: test changing the encounters of a completed hunt
@@ -49,6 +49,6 @@ class ShinyHuntTest {
         hunt.changeEncounters(true)
         hunt.isCompleted = true
         hunt.changeEncounters(true)
-        assertEquals(1,hunt.getEncounters())
+        assertEquals(1,hunt.encounters)
     }
 }

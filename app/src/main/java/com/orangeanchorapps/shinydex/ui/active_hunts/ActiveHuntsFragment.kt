@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.orangeanchorapps.shinydex.MainActivity
 import com.orangeanchorapps.shinydex.R
+import com.orangeanchorapps.shinydex.interfaces.Message
 import com.orangeanchorapps.shinydex.ui.hunt_details.ActiveHuntDetailsFragment
 
 class ActiveHuntsFragment : Fragment() {
@@ -37,6 +38,8 @@ class ActiveHuntsFragment : Fragment() {
         listView.setOnItemClickListener { adapterView, view, i, l ->
             val fragment = ActiveHuntDetailsFragment()
             val manager = parentFragmentManager
+            val m: Message = activity as Message
+            m.setMessage(i)
             manager.beginTransaction().replace(R.id.nav_host_fragment,fragment).addToBackStack("active_hunt_details").commit()
         }
 
