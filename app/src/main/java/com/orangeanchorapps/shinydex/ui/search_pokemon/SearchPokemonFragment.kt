@@ -68,6 +68,7 @@ class SearchPokemonFragment: Fragment() {
 
         }
 
+        (activity as MainActivity).showBackButton()
         return root
     }
 

@@ -6,7 +6,10 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Message
 import android.provider.MediaStore
+import android.util.Log
+import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.ActionBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -22,8 +25,9 @@ class MainActivity : AppCompatActivity(), com.orangeanchorapps.shinydex.interfac
 
     companion object{
         val dex = ShinyDex()
-    }
 
+    }
+    private var sab: ActionBar? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -32,7 +36,7 @@ class MainActivity : AppCompatActivity(), com.orangeanchorapps.shinydex.interfac
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(setOf(
-                R.id.navigation_active_hunts, R.id.navigation_shiny_dex, R.id.navigation_new_hunt, R.id.navigation_shiny_pokemon))
+                R.id.navigation_active_hunts, R.id.navigation_shiny_dex, R.id.navigation_new_hunt))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
@@ -41,11 +45,35 @@ class MainActivity : AppCompatActivity(), com.orangeanchorapps.shinydex.interfac
         dex.addHunt(ShinyHunt(Pokemon("Tangela3"),162,true))
         dex.addHunt(ShinyHunt(Pokemon("Tangela4"),162,true))
         dex.addHunt(ShinyHunt(Pokemon("Squirtle"),312,false))
-
+        //supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        sab = supportActionBar
+        //Toast.makeText(this, "" + (supportActionBar == null) , Toast.LENGTH_SHORT).show()
     }
 
     override fun onBackPressed() {
         super.onBackPressed()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        Log.d("ShinyDex", "onOptionsItemSelected: ")
+        when (item.itemId){
+            android.R.id.home -> {
+                Log.d("ShinyDex", "onOptionsItemSelected: home")
+                supportFragmentManager.popBackStackImmediate()
+            }
+
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    fun showBackButton(){
+        sab?.setDisplayHomeAsUpEnabled(true)
+    }
+    fun hideBackButton(){
+        sab?.setDisplayHomeAsUpEnabled(false)
+    }
+    fun setTitle(s:String){
+        sab?.title = s
     }
 
     override fun setMessage(i:Int) {

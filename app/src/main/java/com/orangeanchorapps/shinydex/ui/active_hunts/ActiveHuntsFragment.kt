@@ -38,8 +38,11 @@ class ActiveHuntsFragment : Fragment() {
         listView.setOnItemClickListener { adapterView, view, i, l ->
             val fragment = ActiveHuntDetailsFragment()
             val manager = parentFragmentManager
-            manager.beginTransaction().replace(R.id.nav_host_fragment,fragment).addToBackStack("fragment").commit()
+            manager.beginTransaction().replace(R.id.nav_host_fragment,fragment).addToBackStack("active_hunt_details").commit()
         }
+
+
+        (activity as MainActivity).hideBackButton()
         return root
     }
 }

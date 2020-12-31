@@ -50,11 +50,12 @@ class ShinyDexFragment : Fragment() {
             val fragment = ShinyPokemonDetailFragment()
             val manager = parentFragmentManager
 
-            manager.beginTransaction().replace(R.id.nav_host_fragment,fragment).commit()
+            manager.beginTransaction().replace(R.id.nav_host_fragment,fragment).addToBackStack("shiny_pokemon_detail").commit()
 
         }
 
 
+        (activity as MainActivity).hideBackButton()
 
         /*shinyDexViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it

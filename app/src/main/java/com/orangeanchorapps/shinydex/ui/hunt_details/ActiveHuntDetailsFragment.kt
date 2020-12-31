@@ -5,13 +5,16 @@ import android.content.Context
 import android.content.DialogInterface
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
+import com.orangeanchorapps.shinydex.MainActivity
 import com.orangeanchorapps.shinydex.R
 import com.orangeanchorapps.shinydex.classes.Pokemon
 import com.orangeanchorapps.shinydex.ui.active_hunts.ActiveHuntsFragment
@@ -29,7 +32,8 @@ class ActiveHuntDetailsFragment: Fragment() {
         val iv = root.findViewById<ImageView>(R.id.ivShinySprite)
         val activeHuntDetailsViewModel =
         ViewModelProvider(this).get(ActiveHuntDetailsViewModel::class.java)
-
+            //Toast.makeText(root.context, "" + (activity?.actionBar == null) , Toast.LENGTH_SHORT).show()
+        (activity as MainActivity).showBackButton()
         //val otherPath: Uri = Uri.parse("android.resource://com.orangeanchorapps.shinydex/drawable/shiny_squirtle_api.png")
         //val imageUri = "drawable://" + R.drawable.shiny_squirtle_api
         //val d = BitmapDrawable.createFromPath(otherPath.toString())
@@ -42,13 +46,13 @@ class ActiveHuntDetailsFragment: Fragment() {
 
         val adapter = ArrayAdapter<String>(root.context, R.layout.support_simple_spinner_dropdown_item, listOf("Choose a hunting method", "Random Encounters", "Masuda", "Chaining", "Raid dens"))
         spinner.adapter = adapter*/
-        val button = root.findViewById<Button>(R.id.btnBackActiveHunt)
+        /*val button = root.findViewById<Button>(R.id.btnBackActiveHunt)
         button.setOnClickListener {
             val manager = parentFragmentManager
             val fragment = ActiveHuntsFragment()
 
             manager.beginTransaction().replace(R.id.nav_host_fragment,fragment).addToBackStack(null).commit()
-        }
+        }*/
         val tvEncounter = root.findViewById<TextView>(R.id.tvEncounterActiveHunt)
         val btnInc = root.findViewById<Button>(R.id.btnAddOne)
         val btnDec = root.findViewById<Button>(R.id.btnSubOne)
@@ -95,6 +99,8 @@ class ActiveHuntDetailsFragment: Fragment() {
         }
         dialog.show()
     }
+
+
 }
 
 
