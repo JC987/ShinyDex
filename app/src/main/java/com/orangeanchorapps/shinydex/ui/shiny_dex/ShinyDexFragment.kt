@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.orangeanchorapps.shinydex.MainActivity
 import com.orangeanchorapps.shinydex.R
+import com.orangeanchorapps.shinydex.ui.shiny_details.ShinyPokemonDetailFragment
 
 
 class ShinyDexFragment : Fragment() {
