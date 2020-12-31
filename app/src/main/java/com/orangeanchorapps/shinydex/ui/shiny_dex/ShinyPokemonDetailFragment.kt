@@ -1,6 +1,6 @@
 package com.orangeanchorapps.shinydex.ui.shiny_dex
 
-import android.net.Uri
+
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,13 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.orangeanchorapps.shinydex.MainActivity
 import com.orangeanchorapps.shinydex.R
-import com.orangeanchorapps.shinydex.ui.shiny_dex.ShinyDexFragment
-import com.orangeanchorapps.shinydex.ui.shiny_dex.ShinyDexViewModel
 
 class ShinyPokemonDetailFragment:Fragment() {
     private val TAG = "ShinyDex"
@@ -30,12 +26,6 @@ class ShinyPokemonDetailFragment:Fragment() {
         shinyDexViewModel.shinyName.observe(viewLifecycleOwner, {
             name.text = it
         })
-
-        /*back.setOnClickListener {
-            val fragment = ShinyDexFragment()
-            val manager = parentFragmentManager
-            manager.beginTransaction().replace(R.id.nav_host_fragment,fragment).commit()
-        }*/
 
         shinyDexViewModel.spriteBitMap.observe(viewLifecycleOwner, {
             Log.d(TAG, "onCreateView: sprite uri observed")

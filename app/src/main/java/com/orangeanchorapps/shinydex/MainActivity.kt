@@ -1,14 +1,9 @@
 package com.orangeanchorapps.shinydex
 
-import android.content.ContentResolver
-import android.graphics.Bitmap
-import android.net.Uri
+
 import android.os.Bundle
-import android.os.Message
-import android.provider.MediaStore
 import android.util.Log
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
@@ -19,7 +14,6 @@ import androidx.navigation.ui.setupWithNavController
 import com.orangeanchorapps.shinydex.classes.Pokemon
 import com.orangeanchorapps.shinydex.classes.ShinyDex
 import com.orangeanchorapps.shinydex.classes.ShinyHunt
-import com.orangeanchorapps.shinydex.ui.search_pokemon.SearchPokemonFragment
 
 class MainActivity : AppCompatActivity(), com.orangeanchorapps.shinydex.interfaces.Message {
 
@@ -28,13 +22,12 @@ class MainActivity : AppCompatActivity(), com.orangeanchorapps.shinydex.interfac
 
     }
     private var sab: ActionBar? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(setOf(
                 R.id.navigation_active_hunts, R.id.navigation_shiny_dex, R.id.navigation_new_hunt))
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -45,9 +38,8 @@ class MainActivity : AppCompatActivity(), com.orangeanchorapps.shinydex.interfac
         dex.addHunt(ShinyHunt(Pokemon("Tangela3"),162,true))
         dex.addHunt(ShinyHunt(Pokemon("Tangela4"),162,true))
         dex.addHunt(ShinyHunt(Pokemon("Squirtle"),312,false))
-        //supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         sab = supportActionBar
-        //Toast.makeText(this, "" + (supportActionBar == null) , Toast.LENGTH_SHORT).show()
     }
 
     override fun onBackPressed() {

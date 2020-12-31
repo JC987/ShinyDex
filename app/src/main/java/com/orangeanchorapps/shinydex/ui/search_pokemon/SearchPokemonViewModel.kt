@@ -1,26 +1,19 @@
 package com.orangeanchorapps.shinydex.ui.search_pokemon
 
-import android.content.ContentResolver
+
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.ImageDecoder
-import android.net.Uri
-import android.os.Bundle
-import android.provider.MediaStore
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.orangeanchorapps.shinydex.MainActivity
 import com.orangeanchorapps.shinydex.R
 import com.orangeanchorapps.shinydex.classes.Pokemon
 import com.orangeanchorapps.shinydex.classes.ShinyDex
 import com.orangeanchorapps.shinydex.classes.ShinyHunt
 import okhttp3.*
 import org.json.JSONObject
-import java.io.ByteArrayInputStream
 import java.io.IOException
 import kotlin.random.Random
 
@@ -66,8 +59,6 @@ class SearchPokemonViewModel:ViewModel() {
             override fun onFailure(call: Call, e: IOException) {
                 Log.d("search", "onFailure: for random id")
                 _pokemonName.postValue(c.getString(R.string.failed_to_load_pokemon))
-
-                //Toast.makeText(c,"Failed to load name, check your internet connection", + Toast.LENGTH_SHORT).show()
             }
 
             override fun onResponse(call: Call, response: Response) {
@@ -99,7 +90,6 @@ class SearchPokemonViewModel:ViewModel() {
             override fun onFailure(call: Call, e: IOException) {
                 _pokemonName.postValue(c.getString(R.string.failed_to_load_sprite))
 
-                //Toast.makeText(c,"Failed to load image, check your internet connection", + Toast.LENGTH_SHORT).show()
             }
 
             override fun onResponse(call: Call, response: Response) {

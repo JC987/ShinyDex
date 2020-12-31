@@ -1,7 +1,6 @@
 package com.orangeanchorapps.shinydex.ui.search_pokemon
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +12,6 @@ import com.google.android.material.snackbar.Snackbar
 import com.orangeanchorapps.shinydex.MainActivity
 import com.orangeanchorapps.shinydex.R
 import com.orangeanchorapps.shinydex.ui.new_hunts.NewHuntFragment
-import com.orangeanchorapps.shinydex.ui.shiny_dex.ShinyDexFragment
 
 class SearchPokemonFragment: Fragment() {
     private var bundle:Bundle = Bundle()
@@ -59,7 +57,6 @@ class SearchPokemonFragment: Fragment() {
             tv.text = it
         }
 
-        //Toast.makeText(root.context,"id $i", + Toast.LENGTH_SHORT).show()
 
         when (i){
             2 -> randomSearch()
@@ -99,8 +96,6 @@ class SearchPokemonFragment: Fragment() {
     private fun searchByName() {
         TODO("Not yet implemented")
     }
-
-    //Toast.makeText(root.context,"id " + pokemonId, + Toast.LENGTH_SHORT).show()
 
 
     fun setBundle(b:Bundle) {

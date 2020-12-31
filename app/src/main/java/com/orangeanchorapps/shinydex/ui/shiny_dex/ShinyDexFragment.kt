@@ -1,25 +1,15 @@
 package com.orangeanchorapps.shinydex.ui.shiny_dex
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.Button
 import android.widget.ListView
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.orangeanchorapps.shinydex.MainActivity
 import com.orangeanchorapps.shinydex.R
-import com.orangeanchorapps.shinydex.ui.new_hunts.NewHuntFragment
-import okhttp3.*
-import okhttp3.internal.wait
-import org.json.JSONObject
-import org.json.JSONStringer
-import java.io.IOException
 
 
 class ShinyDexFragment : Fragment() {
@@ -43,7 +33,6 @@ class ShinyDexFragment : Fragment() {
 
 
         var adapter = ArrayAdapter<String>(root.context,R.layout.layout_item, MainActivity.dex.getCompletedHuntsNames())
-        //val btn: Button = root.findViewById(R.id.testBtn)
         listView.adapter = adapter
 
         listView.setOnItemClickListener { adapterView, view, i, l ->
@@ -57,12 +46,6 @@ class ShinyDexFragment : Fragment() {
 
         (activity as MainActivity).hideBackButton()
 
-        /*shinyDexViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })*/
-
-
-        //shinyDexViewModel.getTang()
         return root
     }
 }

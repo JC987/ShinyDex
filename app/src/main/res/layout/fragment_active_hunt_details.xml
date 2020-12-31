@@ -4,16 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <!--
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbarId"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:navigationIcon="?attr/homeAsUpIndicator"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
--->
 
     <include
         android:layout_width="match_parent"
@@ -25,17 +15,6 @@
         app:layout_constraintTop_toTopOf="parent"
         />
 
-<!--
-            <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/spinner"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/includedFragment"/>
--->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -71,14 +50,6 @@
                     android:id="@+id/btnAddOne"
                     android:text="+ 1"/>
 
-                <!--
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/btnBackActiveHunt"
-                    android:layout_marginStart="16dp"
-                    android:text="@string/back"/>
-                    -->
             </LinearLayout>
 
 
