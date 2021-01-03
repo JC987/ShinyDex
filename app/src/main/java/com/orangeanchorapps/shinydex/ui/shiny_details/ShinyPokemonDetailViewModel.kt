@@ -31,7 +31,7 @@ class ShinyPokemonDetailViewModel : ViewModel() {
     }
 
     val spriteBitMap: LiveData<Bitmap> = _spriteBitMap
-
+/*
     fun getTang(){
         val client = OkHttpClient()
         // completed / already caught pokemon names will be saved to db, this is just a test
@@ -52,24 +52,24 @@ class ShinyPokemonDetailViewModel : ViewModel() {
                 var jsonObject = JSONObject(response.body?.string())
 
                 Log.d(TAG, "onResponse: " + " :: " + jsonObject.get("abilities"))
-                var a:String = jsonObject.get("name").toString()
-
+                var name:String = jsonObject.get("name").toString()
+                name = name.substring(0,1).toUpperCase() + name.substring(1)
                 var j = JSONObject(jsonObject.getString("sprites"))
                 var b:String = j.get("front_shiny").toString()
-                Log.d(TAG, "onResponse: " + " :: " + a)
+                Log.d(TAG, "onResponse: " + " :: " + name)
 
 
 
                 Log.d(TAG, "onResponse: " + " :: " + b)
 
                 //use postvalue, it is async
-                _shinyName.postValue(a)
+                _shinyName.postValue(name)
 
             }
         })
 
     }
-
+*/
 
 
 

@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.orangeanchorapps.shinydex.MainActivity
 import com.orangeanchorapps.shinydex.R
+import com.orangeanchorapps.shinydex.interfaces.Message
 import com.orangeanchorapps.shinydex.ui.shiny_details.ShinyPokemonDetailFragment
 
 
@@ -39,7 +40,8 @@ class ShinyDexFragment : Fragment() {
         listView.setOnItemClickListener { adapterView, view, i, l ->
             val fragment = ShinyPokemonDetailFragment()
             val manager = parentFragmentManager
-
+            val message = (activity as Message)
+            message.setMessage(i)
             manager.beginTransaction().replace(R.id.nav_host_fragment,fragment).addToBackStack("shiny_pokemon_detail").commit()
 
         }

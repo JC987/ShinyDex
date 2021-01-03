@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.orangeanchorapps.shinydex.MainActivity
 import com.orangeanchorapps.shinydex.R
+import com.orangeanchorapps.shinydex.interfaces.Message
 
 
 class ShinyPokemonDetailFragment:Fragment() {
@@ -21,22 +22,29 @@ class ShinyPokemonDetailFragment:Fragment() {
         val root = inflater.inflate(R.layout.fragment_shiny_pokemon_details, container, false)
         val name = root.findViewById<TextView>(R.id.tvShinyPokemonName)
         val sprite = root.findViewById<ImageView>(R.id.ivShinySprite)
-        //val back = root.findViewById<Button>(R.id.btnBackShinyDetails)
         val pb = root.findViewById<ProgressBar>(R.id.progressBar)
-        name.text = shinyPokemonDetailViewModel.shinyName.value
+
+        val index = (activity as Message).receiveMessage()
+        val hunt = MainActivity.dex.getHunt(index)
+        val encounters = root.findViewById<TextView>(R.id.tvEncountersShinyDetails)
+        val tmp = "${getString(R.string.total_encounters)} ${hunt.encounters}"
+        encounters.text = tmp
+
         shinyPokemonDetailViewModel.shinyName.observe(viewLifecycleOwner, {
             name.text = it
         })
 
         shinyPokemonDetailViewModel.spriteBitMap.observe(viewLifecycleOwner, {
             Log.d(TAG, "onCreateView: sprite uri observed")
-            if (it != null)
+            if (it != null) {
                 pb.visibility = View.GONE
+                name.text = hunt.pokemon.name
+            }
             sprite.setImageURI(null)
             sprite.setImageBitmap(it)
+
         })
 
-        shinyPokemonDetailViewModel.getTang()
         shinyPokemonDetailViewModel.getTangImage()
 
 

@@ -12,7 +12,4 @@ data class ShinyHunt(val pokemon:Pokemon, var encounters:Int, var isCompleted:Bo
             if(encounters>0)
                 encounters--
     }
-    fun getEncounters2():Int{
-        return encounters
-    }
 }
