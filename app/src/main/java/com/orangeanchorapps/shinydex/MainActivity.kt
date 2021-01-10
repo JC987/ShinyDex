@@ -49,11 +49,17 @@ class MainActivity : AppCompatActivity(), com.orangeanchorapps.shinydex.interfac
         sab = supportActionBar
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = findNavController(R.id.nav_host_fragment)
+
+        return navController.navigateUp() || super.onSupportNavigateUp()
+    }
+
     override fun onBackPressed() {
         super.onBackPressed()
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    /*override fun onOptionsItemSelected(item: MenuItem): Boolean {
         Log.d("ShinyDex", "onOptionsItemSelected: ")
         when (item.itemId){
             android.R.id.home -> {
@@ -63,7 +69,7 @@ class MainActivity : AppCompatActivity(), com.orangeanchorapps.shinydex.interfac
 
         }
         return super.onOptionsItemSelected(item)
-    }
+    }*/
 
     fun showBackButton(){
         sab?.setDisplayHomeAsUpEnabled(true)
