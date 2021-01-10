@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter
 import android.widget.ListView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.orangeanchorapps.shinydex.MainActivity
 import com.orangeanchorapps.shinydex.R
 import com.orangeanchorapps.shinydex.interfaces.Message
@@ -38,12 +39,15 @@ class ShinyDexFragment : Fragment() {
         listView.adapter = adapter
 
         listView.setOnItemClickListener { adapterView, view, i, l ->
-            val fragment = ShinyPokemonDetailFragment()
+            findNavController().navigate(R.id.action_navigation_shiny_dex_to_navigation_shiny_pokemon)
+            val message = (activity as Message)
+            message.setMessage(i)
+            /*val fragment = ShinyPokemonDetailFragment()
             val manager = parentFragmentManager
             val message = (activity as Message)
             message.setMessage(i)
             manager.beginTransaction().replace(R.id.nav_host_fragment,fragment).addToBackStack("shiny_pokemon_detail").commit()
-
+            */
         }
 
 

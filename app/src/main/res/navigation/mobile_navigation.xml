@@ -9,23 +9,55 @@
         android:id="@+id/navigation_active_hunts"
         android:name="com.orangeanchorapps.shinydex.ui.active_hunts.ActiveHuntsFragment"
         android:label="@string/title_active_hunts"
-        tools:layout="@layout/fragment_active_hunts" />
+        tools:layout="@layout/fragment_active_hunts" >
+
+        <action
+            android:id="@+id/action_navigation_active_hunts_to_navigation_active_hunt_details"
+            app:destination="@id/navigation_active_hunt_details" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_shiny_dex"
         android:name="com.orangeanchorapps.shinydex.ui.shiny_dex.ShinyDexFragment"
         android:label="@string/title_shiny_dex"
-        tools:layout="@layout/fragment_shiny_dex" />
+        tools:layout="@layout/fragment_shiny_dex" >
+        <action
+            android:id="@+id/action_navigation_shiny_dex_to_navigation_shiny_pokemon"
+            app:destination="@id/navigation_shiny_pokemon" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_new_hunt"
         android:name="com.orangeanchorapps.shinydex.ui.new_hunts.NewHuntFragment"
         android:label="@string/title_new_hunt"
-        tools:layout="@layout/fragment_new_hunt" />
+        tools:layout="@layout/fragment_new_hunt" >
+
+        <action
+            android:id="@+id/action_navigation_new_hunt_to_navigation_search_pokemon"
+            app:destination="@id/navigation_search_pokemon" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_shiny_pokemon"
         android:name="com.orangeanchorapps.shinydex.ui.shiny_details.ShinyPokemonDetailFragment"
         android:label="Completed Shiny Pokemon"
         tools:layout="@layout/fragment_shiny_pokemon_details" />
+
+    <fragment
+        android:id="@+id/navigation_search_pokemon"
+        android:name="com.orangeanchorapps.shinydex.ui.search_pokemon.SearchPokemonFragment"
+        android:label="Search pokemon results"
+        tools:layout="@layout/fragment_search_pokemon" />
+
+
+    <fragment
+        android:id="@+id/navigation_active_hunt_details"
+        android:name="com.orangeanchorapps.shinydex.ui.hunt_details.ActiveHuntDetailsFragment"
+        android:label="Active hunt details"
+        tools:layout="@layout/fragment_active_hunt_details" >
+        <action
+            android:id="@+id/action_navigation_active_hunt_details_to_navigation_active_hunts"
+            app:destination="@id/navigation_active_hunts" />
+    </fragment>
+
 </navigation>

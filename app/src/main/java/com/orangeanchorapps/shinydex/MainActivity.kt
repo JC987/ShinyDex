@@ -32,7 +32,8 @@ class MainActivity : AppCompatActivity(), com.orangeanchorapps.shinydex.interfac
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
         val appBarConfiguration = AppBarConfiguration(setOf(
-                R.id.navigation_active_hunts, R.id.navigation_shiny_dex, R.id.navigation_new_hunt))
+                R.id.navigation_active_hunts, R.id.navigation_shiny_dex, R.id.navigation_new_hunt,
+                 R.id.navigation_active_hunt_details, R.id.navigation_shiny_pokemon,R.id.navigation_search_pokemon))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 

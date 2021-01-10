@@ -8,6 +8,7 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.orangeanchorapps.shinydex.MainActivity
 import com.orangeanchorapps.shinydex.R
 import com.orangeanchorapps.shinydex.ui.search_pokemon.SearchPokemonFragment
@@ -37,11 +38,14 @@ class NewHuntFragment : Fragment() {
     }
 
     private fun gotoSearchFragment() {
-        val fragment = SearchPokemonFragment()
+        findNavController().navigate(R.id.action_navigation_new_hunt_to_navigation_search_pokemon)
+
+/*        val fragment = SearchPokemonFragment()
         val manager = parentFragmentManager
         val bundle:Bundle = Bundle()
         bundle.putInt("search_method",2)
         fragment.setBundle(bundle)
         manager.beginTransaction().replace(R.id.nav_host_fragment,fragment).addToBackStack("search_pokemon").commit()
+        */
     }
 }

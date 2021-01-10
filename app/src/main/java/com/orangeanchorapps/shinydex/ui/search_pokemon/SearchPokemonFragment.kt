@@ -22,8 +22,8 @@ class SearchPokemonFragment: Fragment() {
     lateinit var searchPokemonViewModel: SearchPokemonViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val i = bundle.getInt("search_method",0)
-
+        //val i = bundle.getInt("search_method",0)
+        val i = 2
         searchPokemonViewModel = ViewModelProvider(this).get(SearchPokemonViewModel::class.java)
         root = inflater.inflate(R.layout.fragment_search_pokemon,container,false)
         val iv = root.findViewById<ImageView>(R.id.ivShinySprite)
