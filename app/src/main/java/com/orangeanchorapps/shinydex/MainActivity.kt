@@ -37,14 +37,9 @@ class MainActivity : AppCompatActivity(), com.orangeanchorapps.shinydex.interfac
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        dex.addHunt(ShinyHunt(Pokemon("Tangela"),162,true))
-        dex.addHunt(ShinyHunt(Pokemon("Tangela2"),12,true))
-        dex.addHunt(ShinyHunt(Pokemon("Tangela3"),16,true))
-        dex.addHunt(ShinyHunt(Pokemon("Tangela4"),62,true))
 
-        val bitmap = BitmapFactory.decodeResource(resources,R.drawable.shiny_squirtle_api)
 
-        dex.addHunt(ShinyHunt(Pokemon("Squirtle", bitmap),312,false))
+
 
         sab = supportActionBar
     }

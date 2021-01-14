@@ -34,6 +34,15 @@ class SearchPokemonViewModel:ViewModel() {
         value = null
     }
 
+
+    private val _pokemonId = MutableLiveData<Int>().apply {
+        value = -1
+    }
+
+    val pokemonId: LiveData<Int> = _pokemonId
+
+
+
     val spriteBitMap: LiveData<Bitmap> = _spriteBitMap
 
     private val _success = MutableLiveData<Boolean>().apply {
@@ -50,6 +59,7 @@ class SearchPokemonViewModel:ViewModel() {
 
         val id = if(_randomId.value == -1) Random.nextInt(1, 898) else _randomId.value
 
+        _pokemonId.value = id
         val client = OkHttpClient()
 
         val request:Request = Request.Builder()
@@ -104,11 +114,12 @@ class SearchPokemonViewModel:ViewModel() {
     }
 
     fun addPokemon(dex: ShinyDex): Boolean{
+        val i = pokemonId.value
         val n = pokemonName.value
         val b = spriteBitMap.value
-        if(n != null && b != null) {
-            val p = Pokemon(n, b)
-            val s = ShinyHunt(p,0,false)
+        if(n != null && b != null && i != null ) {
+            val p = Pokemon(i, n, b)
+            val s = ShinyHunt(0, p, p.id,0,false)
             dex.addHunt(s)
             return true
         }
