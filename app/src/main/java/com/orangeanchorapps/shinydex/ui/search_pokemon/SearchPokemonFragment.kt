@@ -8,6 +8,7 @@ import android.widget.*
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.orangeanchorapps.shinydex.MainActivity
 import com.orangeanchorapps.shinydex.R
@@ -79,9 +80,10 @@ class SearchPokemonFragment: Fragment() {
         },10000)
     }
     private fun goBack() {
-        val fragment = NewHuntFragment()
+        /*val fragment = NewHuntFragment()
         val manager = parentFragmentManager
-        manager.beginTransaction().replace(R.id.nav_host_fragment,fragment).addToBackStack(null).commit()
+        manager.beginTransaction().replace(R.id.nav_host_fragment,fragment).addToBackStack(null).commit()*/
+        findNavController().navigateUp()
     }
 
     private fun randomSearch() {

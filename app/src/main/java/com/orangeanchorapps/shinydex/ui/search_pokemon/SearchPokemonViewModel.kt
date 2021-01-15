@@ -1,24 +1,35 @@
 package com.orangeanchorapps.shinydex.ui.search_pokemon
 
 
+import android.app.Application
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import com.orangeanchorapps.shinydex.R
 import com.orangeanchorapps.shinydex.classes.Pokemon
 import com.orangeanchorapps.shinydex.classes.ShinyDex
 import com.orangeanchorapps.shinydex.classes.ShinyHunt
+import com.orangeanchorapps.shinydex.dao.PokemonDao
+import com.orangeanchorapps.shinydex.dao.ShinyHuntDao
+import com.orangeanchorapps.shinydex.database.PokemonDatabase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import okhttp3.*
 import org.json.JSONObject
 import java.io.IOException
 import kotlin.random.Random
 
 
-class SearchPokemonViewModel:ViewModel() {
+class SearchPokemonViewModel(application: Application) :AndroidViewModel(application) {
+    val pokemonDao:PokemonDao
+    val shinyHuntDao: ShinyHuntDao
+    init{
+        pokemonDao = PokemonDatabase.getDatabase(application).PokemonDao()
+        shinyHuntDao = PokemonDatabase.getDatabase(application).ShinyHuntDao()
+
+    }
 
     private val _method = MutableLiveData<Int>().apply {
         value = 0
@@ -120,6 +131,12 @@ class SearchPokemonViewModel:ViewModel() {
         if(n != null && b != null && i != null ) {
             val p = Pokemon(i, n, b)
             val s = ShinyHunt(0, p, p.id,0,false)
+            viewModelScope.launch (Dispatchers.IO) {
+                pokemonDao.addPokemon(p)
+                shinyHuntDao.addShinyHunt(s)
+            }
+
+
             dex.addHunt(s)
             return true
         }

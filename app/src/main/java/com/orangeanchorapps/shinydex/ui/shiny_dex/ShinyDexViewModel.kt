@@ -11,6 +11,7 @@ import com.orangeanchorapps.shinydex.R
 import com.orangeanchorapps.shinydex.classes.Pokemon
 import com.orangeanchorapps.shinydex.classes.ShinyHunt
 import com.orangeanchorapps.shinydex.dao.PokemonDao
+import com.orangeanchorapps.shinydex.dao.ShinyHuntDao
 import com.orangeanchorapps.shinydex.database.PokemonDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
@@ -18,14 +19,14 @@ import kotlinx.coroutines.launch
 import okhttp3.Dispatcher
 
 class ShinyDexViewModel(application: Application) : AndroidViewModel(application) {
-    val allPokemon:LiveData<List<Pokemon>>
     private val pokemonDao: PokemonDao
+    private val shinyHuntDao: ShinyHuntDao
     private val bitmap:Bitmap
 
     init{
         pokemonDao = PokemonDatabase.getDatabase(application).PokemonDao()
+        shinyHuntDao = PokemonDatabase.getDatabase(application).ShinyHuntDao()
 
-        allPokemon = pokemonDao.getAllPokemon()
         bitmap = BitmapFactory.decodeResource(application.resources, R.drawable.shiny_squirtle_api)
         setup()
     }
@@ -42,24 +43,28 @@ class ShinyDexViewModel(application: Application) : AndroidViewModel(application
             return
         }
         val tangela = Pokemon(114,"Tangela")
-
+        val hunt1 = ShinyHunt(0, tangela, tangela.id,162,true)
         val squirtle = Pokemon(7,"Squirtle", bitmap)
+        val hunt2 = ShinyHunt(0, squirtle, squirtle.id, 312,false)
 
         //launch a thread that will last the for as long as the viewModel does
         //IO is a thread for input / ouput
         viewModelScope.launch (Dispatchers.IO){
             pokemonDao.addPokemon(tangela)
             pokemonDao.addPokemon(squirtle)
+
+            shinyHuntDao.addShinyHunt(hunt1)
+            shinyHuntDao.addShinyHunt(hunt2)
         }
 
         dex.addHunt(
-            ShinyHunt(
-                0, tangela, tangela.id,162,true)
+            hunt1
         )
 
 
-        dex.addHunt(ShinyHunt(
-            0, squirtle, squirtle.id, 312,false))
+        dex.addHunt(
+            hunt2
+        )
     }
 
 }

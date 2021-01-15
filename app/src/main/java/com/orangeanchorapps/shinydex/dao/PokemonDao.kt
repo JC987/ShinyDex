@@ -14,4 +14,7 @@ interface PokemonDao {
 
     @Query("SELECT * FROM pokemon")
     fun getAllPokemon():LiveData<List<Pokemon>>
+
+    @Query("DELETE FROM pokemon")
+    suspend fun deleteAllPokemon()
 }
