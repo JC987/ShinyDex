@@ -30,22 +30,21 @@ class ShinyPokemonDetailFragment:Fragment() {
         val tmp = "${getString(R.string.total_encounters)} ${hunt.encounters}"
         encounters.text = tmp
 
-        shinyPokemonDetailViewModel.shinyName.observe(viewLifecycleOwner, {
+        shinyPokemonDetailViewModel.pokemonName.observe(viewLifecycleOwner, {
             name.text = it
         })
-
+        shinyPokemonDetailViewModel.resetSprite()
         shinyPokemonDetailViewModel.spriteBitMap.observe(viewLifecycleOwner, {
             Log.d(TAG, "onCreateView: sprite uri observed")
             if (it != null) {
                 pb.visibility = View.GONE
                 name.text = hunt.pokemon.name
             }
-            sprite.setImageURI(null)
             sprite.setImageBitmap(it)
 
         })
-
-        shinyPokemonDetailViewModel.getTangImage()
+        shinyPokemonDetailViewModel.setPokemonId(hunt.pokemonId)
+        shinyPokemonDetailViewModel.loadPokemonSprite()
 
 
         (activity as MainActivity).showBackButton()

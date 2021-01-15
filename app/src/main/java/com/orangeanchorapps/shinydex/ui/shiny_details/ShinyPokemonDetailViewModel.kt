@@ -20,17 +20,24 @@ class ShinyPokemonDetailViewModel : ViewModel() {
     }
     val text: LiveData<String> = _text
 
-    private val _shinyName = MutableLiveData<String>().apply {
+    private val _pokemonName = MutableLiveData<String>().apply {
         value = "loading..."
     }
 
-    val shinyName: LiveData<String> = _shinyName
+    val pokemonName: LiveData<String> = _pokemonName
 
     private val _spriteBitMap = MutableLiveData<Bitmap>().apply {
         value = null
     }
 
     val spriteBitMap: LiveData<Bitmap> = _spriteBitMap
+
+    private val _pokemonId = MutableLiveData<Int>().apply {
+        value = 114
+    }
+    val pokemonId: LiveData<Int> = _pokemonId
+
+
 /*
     fun getTang(){
         val client = OkHttpClient()
@@ -72,17 +79,22 @@ class ShinyPokemonDetailViewModel : ViewModel() {
 */
 
 
+    fun setPokemonId(id:Int){
+        _pokemonId.value = id
+    }
+    fun resetSprite(){
+        _spriteBitMap.value = null
+    }
 
-
-    fun getTangImage(){
+    fun loadPokemonSprite(){
+        Log.d(TAG, "loadPokemonSprite: ${pokemonId.value} `` ${spriteBitMap.value}")
         var client = OkHttpClient()
         //I will store image url to db and fetch kinda like this
         val request = Request.Builder()
-            .url("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/114.png")
+            .url("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${pokemonId.value}.png")
             .build()
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
-                TODO("Not yet implemented")
                 Log.d(TAG, "onFailure: failed to get image")
             }
 

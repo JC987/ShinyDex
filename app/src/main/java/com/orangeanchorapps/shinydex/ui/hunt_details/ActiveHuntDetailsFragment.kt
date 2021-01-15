@@ -49,7 +49,13 @@ class ActiveHuntDetailsFragment: Fragment() {
         val tvEncounter = root.findViewById<TextView>(R.id.tvEncounterActiveHunt)
         val btnInc = root.findViewById<Button>(R.id.btnAddOne)
         val btnDec = root.findViewById<Button>(R.id.btnSubOne)
+        val btnFinish = root.findViewById<Button>(R.id.btnFinishHunt)
 
+        btnFinish.setOnClickListener {
+            hunt.isCompleted = true
+            activeHuntDetailsViewModel.updateShinyHunt(hunt)
+            findNavController().navigateUp()
+        }
         btnInc.setOnClickListener {
             activeHuntDetailsViewModel.incrementEncounters()
         }

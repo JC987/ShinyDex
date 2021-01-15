@@ -56,7 +56,7 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/btnConfirmHunt"
+                android:id="@+id/btnFinishHunt"
                 android:text="@string/finish_hunt"
                 android:backgroundTint="#4CAF50"
                 android:layout_gravity="bottom"
