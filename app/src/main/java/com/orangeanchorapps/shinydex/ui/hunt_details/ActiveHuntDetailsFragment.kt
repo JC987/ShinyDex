@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.orangeanchorapps.shinydex.MainActivity
 import com.orangeanchorapps.shinydex.R
@@ -41,8 +42,9 @@ class ActiveHuntDetailsFragment: Fragment() {
 
         val hunt: ShinyHunt = dex.getActiveHunts().get(index)
 
+
         val pb = root.findViewById<ProgressBar>(R.id.progressBar)
-        pb.visibility = View.GONE
+
 
         val tvEncounter = root.findViewById<TextView>(R.id.tvEncounterActiveHunt)
         val btnInc = root.findViewById<Button>(R.id.btnAddOne)
@@ -65,17 +67,27 @@ class ActiveHuntDetailsFragment: Fragment() {
 
         activeHuntDetailsViewModel.encounters.observe(viewLifecycleOwner, {
             hunt.encounters = it
+            activeHuntDetailsViewModel.updateShinyHunt(hunt)
         })
 
         activeHuntDetailsViewModel.text.observe(viewLifecycleOwner,{
             tvEncounter.text = it
         })
 
+        activeHuntDetailsViewModel.spriteBitMap.observe(viewLifecycleOwner){
+            iv.setImageBitmap(it)
+            if(it != null)
+                pb.visibility = View.GONE
+        }
+
         tvName.text = hunt.pokemon.name
-        iv.setImageBitmap(hunt.pokemon.sprite)
+        //iv.setImageBitmap(hunt.pokemon.sprite)
         activeHuntDetailsViewModel.setEncounters(hunt.encounters)
+        activeHuntDetailsViewModel.setPokemonId(hunt.pokemonId)
+        activeHuntDetailsViewModel.loadPokemonSprite()
         return root
     }
+
 
     private fun setEncounterDialog(v:View, f: (Int)->Boolean) {
         val dialog = AlertDialog.Builder(c)

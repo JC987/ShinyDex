@@ -1,11 +1,21 @@
 package com.orangeanchorapps.shinydex.ui.hunt_details
 
+import android.app.Application
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
+import com.orangeanchorapps.shinydex.R
+import com.orangeanchorapps.shinydex.classes.ShinyHunt
+import com.orangeanchorapps.shinydex.dao.ShinyHuntDao
+import com.orangeanchorapps.shinydex.database.PokemonDatabase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import okhttp3.*
+import java.io.IOException
 
-class ActiveHuntDetailsViewModel : ViewModel() {
+class ActiveHuntDetailsViewModel(application: Application) : AndroidViewModel(application) {
+    private val shinyHuntDao = PokemonDatabase.getDatabase(application).ShinyHuntDao()
     private val en:String = "Encounters: "
     private val _encounters = MutableLiveData<Int>().apply {
         value = 0
@@ -15,6 +25,20 @@ class ActiveHuntDetailsViewModel : ViewModel() {
     }
     val text: LiveData<String> = _textEncounters
     val encounters: LiveData<Int> = _encounters
+
+    private val _spriteBitMap = MutableLiveData<Bitmap>().apply {
+        value = null
+    }
+    val spriteBitMap: LiveData<Bitmap> = _spriteBitMap
+
+    private val _pokemonId = MutableLiveData<Int>().apply {
+        value = 7
+    }
+    var pokemonId: LiveData<Int> = _pokemonId
+
+    fun setPokemonId(id: Int){
+        _pokemonId.value = id
+    }
 
     fun incrementEncounters(){
         _encounters.value = _encounters.value?.inc()
@@ -40,5 +64,34 @@ class ActiveHuntDetailsViewModel : ViewModel() {
             return true
         }
         return false
+    }
+    fun updateShinyHunt(hunt:ShinyHunt){
+        viewModelScope.launch(Dispatchers.IO) {
+            shinyHuntDao.updatePokemon(hunt)
+        }
+    }
+
+    fun loadPokemonSprite(){
+            var client = OkHttpClient()
+            //I will store image url to db and fetch kinda like this
+            val request = Request.Builder()
+                    .url("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${pokemonId.value}.png")
+                    .build()
+            client.newCall(request).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+                   // _pokemonName.postValue(c.getString(R.string.failed_to_load_sprite))
+
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+                    var istream = response.body?.byteStream()
+                    var bitmap = BitmapFactory.decodeStream(istream)
+
+                    _spriteBitMap.postValue(bitmap)
+                }
+
+            })
+
+
     }
 }

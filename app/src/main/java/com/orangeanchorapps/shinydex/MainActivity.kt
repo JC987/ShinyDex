@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity(), com.orangeanchorapps.shinydex.interfac
 
 
 
-
+        Log.d("ShinyDex", "onCreate: !!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
         sab = supportActionBar
     }

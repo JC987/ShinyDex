@@ -1,6 +1,9 @@
 package com.orangeanchorapps.shinydex.classes
 
-class ShinyDex(private val dex: ArrayList<ShinyHunt> = ArrayList<ShinyHunt>()) {
+import android.util.Log
+import com.orangeanchorapps.shinydex.MainActivity
+
+class ShinyDex(val dex: ArrayList<ShinyHunt> = ArrayList<ShinyHunt>()) {
 
     fun addHunt(hunt: ShinyHunt){
         dex.add(hunt)
@@ -55,5 +58,22 @@ class ShinyDex(private val dex: ArrayList<ShinyHunt> = ArrayList<ShinyHunt>()) {
                 tmp.add(item.pokemon.name + " ~ (Encounters: " + item.encounters + ")")
         }
         return tmp
+    }
+
+    fun reset(list: List<PokemonShinyHunt>) {
+        dex.clear()
+        for(item:PokemonShinyHunt in list){
+
+           this.dex.add(
+                    ShinyHunt(
+                            item.id,
+                            Pokemon(item.pokemonId, item.pokemonName),
+                            item.pokemonId,
+                            item.encounters,
+                            item.isCompleted
+                    ))
+
+            Log.d("ShinyDex", "update: ${item.pokemonName}")
+        }
     }
 }

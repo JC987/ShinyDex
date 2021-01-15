@@ -1,6 +1,7 @@
 package com.orangeanchorapps.shinydex.ui.shiny_dex
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.orangeanchorapps.shinydex.MainActivity
 import com.orangeanchorapps.shinydex.R
+import com.orangeanchorapps.shinydex.classes.Pokemon
+import com.orangeanchorapps.shinydex.classes.PokemonShinyHunt
+import com.orangeanchorapps.shinydex.classes.ShinyHunt
 import com.orangeanchorapps.shinydex.interfaces.Message
 import com.orangeanchorapps.shinydex.ui.shiny_details.ShinyPokemonDetailFragment
 
@@ -30,13 +34,19 @@ class ShinyDexFragment : Fragment() {
 
         val root = inflater.inflate(R.layout.fragment_shiny_dex, container, false)
 
-
-
         val listView: ListView = root.findViewById(R.id.shinyDexListView)
 
 
         var adapter = ArrayAdapter<String>(root.context,R.layout.layout_item, MainActivity.dex.getCompletedHuntsNames())
         listView.adapter = adapter
+
+        shinyDexViewModel.completedHunts.observe(viewLifecycleOwner){
+            Log.d(TAG, "completedHunts: observe")
+            MainActivity.dex.reset(it)
+
+            adapter = ArrayAdapter<String>(root.context,R.layout.layout_item, MainActivity.dex.getCompletedHuntsNames())
+            listView.adapter = adapter
+        }
 
         listView.setOnItemClickListener { adapterView, view, i, l ->
             findNavController().navigate(R.id.action_navigation_shiny_dex_to_navigation_shiny_pokemon)
