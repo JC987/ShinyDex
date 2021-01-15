@@ -35,7 +35,7 @@
                 android:gravity="center"
                 android:id="@+id/linearLayoutEncounterButtons"
                 app:layout_constraintTop_toBottomOf="@id/tvEncounterActiveHunt"
-                app:layout_constraintBottom_toBottomOf="@id/btnConfirmHunt"
+                app:layout_constraintBottom_toBottomOf="@id/btnFinishHunt"
                 app:layout_constraintStart_toStartOf="parent">
                 <Button
                     android:layout_width="wrap_content"
