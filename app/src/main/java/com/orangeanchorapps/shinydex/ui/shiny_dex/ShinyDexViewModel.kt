@@ -53,27 +53,13 @@ class ShinyDexViewModel(application: Application) : AndroidViewModel(application
         }
 
 
-        val tangela = Pokemon(114,"Tangela")
-        val hunt1 = ShinyHunt(0, tangela, tangela.id,162,true)
-        val squirtle = Pokemon(7,"Squirtle", bitmap)
-        val hunt2 = ShinyHunt(0, squirtle, squirtle.id, 312,false)
+    }
 
-        //launch a thread that will last the for as long as the viewModel does
-        //IO is a thread for input / ouput
-
-
-
-
-
-
-
-
-            /*while(c.moveToNext()){
-                Log.d(TAG, "setup: c0 ${c.getInt(0)} c1 ${c.getString(1)} c2 ${c.getInt(2)}  c3 ${c.getInt(3)}" )
-            }
-        }*/
-
-
+    fun deleteShinyHunt(hunt: ShinyHunt){
+        viewModelScope.launch (Dispatchers.IO){
+            shinyHuntDao.deleteShinyHunt(hunt)
+            pokemonDao.deleteAllUnusedPokemon()
+        }
     }
 
 }

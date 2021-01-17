@@ -13,7 +13,10 @@ interface ShinyHuntDao {
     suspend fun addShinyHunt(shinyHunt: ShinyHunt)
 
     @Update()
-    suspend fun updatePokemon(shinyHunt: ShinyHunt)
+    suspend fun updateShinyHunt(shinyHunt: ShinyHunt)
+
+    @Delete
+    suspend fun deleteShinyHunt(shinyHunt: ShinyHunt)
 
     @Query("SELECT * FROM shiny_hunt")
     fun getAllShinyHunts(): LiveData<List<ShinyHunt>>

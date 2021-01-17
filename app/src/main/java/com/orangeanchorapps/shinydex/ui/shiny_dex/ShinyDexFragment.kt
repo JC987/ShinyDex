@@ -1,5 +1,7 @@
 package com.orangeanchorapps.shinydex.ui.shiny_dex
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -60,9 +62,29 @@ class ShinyDexFragment : Fragment() {
             */
         }
 
+        listView.setOnItemLongClickListener { adapterView, view, i, l ->
+            createDialog(i)
+            return@setOnItemLongClickListener(true)
+        }
+
 
         (activity as MainActivity).hideBackButton()
 
         return root
+    }
+
+    private fun createDialog(index: Int){
+        val dialog = AlertDialog.Builder(requireContext())
+        dialog.setTitle("Delete")
+        dialog.setMessage("Do you want to delete this hunt?")
+        dialog.setPositiveButton("Yes", DialogInterface.OnClickListener { _, _, ->
+            val hunt = MainActivity.dex.getHunt(index)
+            MainActivity.dex.remove(index)
+            shinyDexViewModel.deleteShinyHunt(hunt)
+        })
+        dialog.setNegativeButton("No", DialogInterface.OnClickListener { _, _ ->  })
+        dialog.create()
+        dialog.show()
+
     }
 }

@@ -67,7 +67,7 @@ class ActiveHuntDetailsViewModel(application: Application) : AndroidViewModel(ap
     }
     fun updateShinyHunt(hunt:ShinyHunt){
         viewModelScope.launch(Dispatchers.IO) {
-            shinyHuntDao.updatePokemon(hunt)
+            shinyHuntDao.updateShinyHunt(hunt)
         }
     }
 
