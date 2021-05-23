@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/activeHuntFragment"
+        android:icon="@drawable/ic_twotone_brightness_1_24"
+        android:title="Active" />
+    <item
+        android:id="@+id/searchPokemonFragment"
+        android:icon="@drawable/ic_search_black_24dp"
+        android:title="Search" />
+    <item
+        android:id="@+id/completedHuntFragment"
+        android:icon="@drawable/completed_24"
+        android:title="Completed" />
+</menu>

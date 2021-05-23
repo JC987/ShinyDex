@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/activeHuntFragment">
+
+    <!-- ids for fragments must match id in nav menu-->
+    <fragment
+
+        android:id="@+id/activeHuntFragment"
+        android:name="com.orangeanchorapps.shinydex.Fragments.ActiveHuntFragment"
+        android:label="Active"
+        tools:layout="@layout/active_hunt_fragment" />
+    <fragment
+        android:id="@+id/completedHuntFragment"
+        android:name="com.orangeanchorapps.shinydex.Fragments.CompletedHuntFragment"
+        android:label="Completed"
+        tools:layout="@layout/completed_hunt_fragment" />
+    <fragment
+        android:id="@+id/searchPokemonFragment"
+        android:name="com.orangeanchorapps.shinydex.Fragments.SearchPokemonFragment"
+        android:label="Search"
+        tools:layout="@layout/search_pokemon_fragment" />
+</navigation>
