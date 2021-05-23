@@ -21,5 +21,14 @@
         android:id="@+id/searchPokemonFragment"
         android:name="com.orangeanchorapps.shinydex.Fragments.SearchPokemonFragment"
         android:label="Search"
-        tools:layout="@layout/search_pokemon_fragment" />
+        tools:layout="@layout/search_pokemon_fragment" >
+        <action
+            android:id="@+id/action_searchPokemonFragment_to_locatedPokemonFragment"
+            app:destination="@id/locatedPokemonFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/locatedPokemonFragment"
+        android:name="com.orangeanchorapps.shinydex.LocatedPokemonFragment"
+        android:label="Random Pokemon Found!"
+        tools:layout="@layout/located_pokemon_fragment" />
 </navigation>

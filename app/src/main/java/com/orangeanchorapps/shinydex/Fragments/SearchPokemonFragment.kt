@@ -6,13 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import androidx.navigation.fragment.findNavController
 import com.orangeanchorapps.shinydex.R
 
 class SearchPokemonFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = SearchPokemonFragment()
-    }
 
     private lateinit var viewModel: SearchPokemonViewModel
 
@@ -20,13 +19,18 @@ class SearchPokemonFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.search_pokemon_fragment, container, false)
+        val view = inflater.inflate(R.layout.search_pokemon_fragment, container, false)
+
+        val btnRan = view.findViewById<Button>(R.id.btnSearchRandom)
+
+        btnRan.setOnClickListener {
+
+            findNavController().navigate(R.id.action_searchPokemonFragment_to_locatedPokemonFragment)
+        }
+
+        return view
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(SearchPokemonViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
+
 
 }

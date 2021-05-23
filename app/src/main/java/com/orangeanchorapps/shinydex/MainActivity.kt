@@ -21,11 +21,18 @@ class MainActivity : AppCompatActivity() {
 
         //allows the action bar to change title with fragments
         val actionBarController = AppBarConfiguration(setOf(R.id.activeHuntFragment, R.id.completedHuntFragment, R.id.searchPokemonFragment))
+
         setupActionBarWithNavController(navController, actionBarController)
 
         //add nav contoller to nav view
         //so now if a view in bottom nav is clicked the fragments will change to the matching one
         btmNavView.setupWithNavController(navController)
 
+    }
+
+    // allows back button in actionbar to move back to previous fragment
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = findNavController(R.id.fragment)
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 }
