@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/locatedPokemonFragment"
-        android:name="com.orangeanchorapps.shinydex.LocatedPokemonFragment"
+        android:name="com.orangeanchorapps.shinydex.Fragments.LocatedPokemonFragment"
         android:label="Random Pokemon Found!"
         tools:layout="@layout/located_pokemon_fragment" />
 </navigation>
