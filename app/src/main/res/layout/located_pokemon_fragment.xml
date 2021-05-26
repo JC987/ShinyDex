@@ -17,7 +17,7 @@
 
     <Button
         android:layout_width="wrap_content"
-        android:layout_height="300dp"
+        android:layout_height="wrap_content"
         android:text="Start Hunting!"
         android:id="@+id/btnStartNew"
         app:layout_constraintTop_toBottomOf="@+id/include"

@@ -11,7 +11,11 @@
         android:id="@+id/activeHuntFragment"
         android:name="com.orangeanchorapps.shinydex.Fragments.ActiveHuntFragment"
         android:label="Active"
-        tools:layout="@layout/active_hunt_fragment" />
+        tools:layout="@layout/active_hunt_fragment" >
+        <action
+            android:id="@+id/action_activeHuntFragment_to_activeHuntDetailedFragment"
+            app:destination="@id/activeHuntDetailedFragment" />
+    </fragment>
     <fragment
         android:id="@+id/completedHuntFragment"
         android:name="com.orangeanchorapps.shinydex.Fragments.CompletedHuntFragment"
@@ -31,4 +35,9 @@
         android:name="com.orangeanchorapps.shinydex.Fragments.LocatedPokemonFragment"
         android:label="Random Pokemon Found!"
         tools:layout="@layout/located_pokemon_fragment" />
+    <fragment
+        android:id="@+id/activeHuntDetailedFragment"
+        android:name="com.orangeanchorapps.shinydex.ActiveHuntDetailedFragment"
+        android:label="active_hunt_detailed_fragment"
+        tools:layout="@layout/active_hunt_detailed_fragment" />
 </navigation>

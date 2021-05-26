@@ -1,18 +1,36 @@
 package com.orangeanchorapps.shinydex.Fragments
 
+import android.app.Application
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Log
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.orangeanchorapps.shinydex.Classes.Pokemon
+import com.orangeanchorapps.shinydex.Classes.ShinyHunt
+import com.orangeanchorapps.shinydex.DAO.PokemonDAO
+import com.orangeanchorapps.shinydex.DAO.ShinyHuntDAO
+import com.orangeanchorapps.shinydex.Database.PokemonDatabase
+import com.orangeanchorapps.shinydex.Database.PokemonRepository
+import com.orangeanchorapps.shinydex.Database.ShinyHuntRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONObject
 import java.util.Random
-class LocatedPokemonViewModel : ViewModel() {
+class LocatedPokemonViewModel(application: Application) : AndroidViewModel(application) {
+    private val pokemonRepo: PokemonRepository
+    private val pokemonDAO: PokemonDAO
+    private val shinyHuntDAO: ShinyHuntDAO
+    private val shinyHuntRepo: ShinyHuntRepository
+    private val ranNum:Int
+
+
     private val _bitmap = MutableLiveData<Bitmap>()
     var bitmap = _bitmap
 
@@ -20,14 +38,21 @@ class LocatedPokemonViewModel : ViewModel() {
     var pokemonName = _pokemonName
 
     init {
+
+        pokemonDAO = PokemonDatabase.getDatabase(application.applicationContext)!!.pokemonDAO()
+        shinyHuntDAO = PokemonDatabase.getDatabase(application.applicationContext)!!.shinyHuntDAO()
+
+        pokemonRepo = PokemonRepository(pokemonDAO)
+        shinyHuntRepo = ShinyHuntRepository(shinyHuntDAO)
+
         val r = Random()
-        val ranNum = r.nextInt(896)
-        loadImage(ranNum)
-        loadName(ranNum)
+        ranNum = r.nextInt(896)
+        loadImage()
+        loadName()
     }
 
 
-    private fun loadName(ranNum: Int) {
+    /*private fun loadName(ranNum: Int) {
         val client = OkHttpClient()
         val request = Request.Builder().run{
             url("https://pokeapi.co/api/v2/pokemon/$ranNum")
@@ -41,25 +66,46 @@ class LocatedPokemonViewModel : ViewModel() {
             Log.d("loadPokemon", "loadName: $name")
             pokemonName.postValue(name)
         }
+    }*/
+    private fun loadName() {
+        val client = OkHttpClient()
+        val request = Request.Builder().run {
+            url("https://pokeapi.co/api/v2/pokemon/$ranNum")
+            build()
+        }
+
+        viewModelScope.launch(Dispatchers.IO) {
+            pokemonName.postValue(pokemonRepo.fetchPokemonName(client,request))
+        }
     }
 
 
-    private fun loadImage(ranNum: Int) {
+    private fun loadImage() {
 
 
         val client = OkHttpClient()
-        val requestBuilder = Request.Builder().run {
+        val request = Request.Builder().run {
             url("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/$ranNum.png")
             build()
         }
 
         viewModelScope.launch(Dispatchers.IO) {
-            val response = client.newCall(requestBuilder).execute()
-            val body = response.body
-            val byteStream = body?.byteStream()
-            bitmap.postValue(BitmapFactory.decodeStream(byteStream))
+            bitmap.postValue(pokemonRepo.fetchPokemonSprite(client, request))
             Log.d("loadpokemon", "load: $ranNum" )
         }
 
+    }
+
+    fun addToDatabase(): Job {
+        val p = Pokemon(pokemonId = ranNum, pokemonName = pokemonName.value, pokemonSprite = bitmap.value )
+
+        val sh = ShinyHunt(id= 0, pokemonId = ranNum, isActive = true, encounters = 0)
+
+        val job = viewModelScope.launch (Dispatchers.IO) {
+            pokemonRepo.addPokemon(p)
+            shinyHuntRepo.addShinyHunt(sh)
+
+        }
+        return job
     }
 }

@@ -1,5 +1,18 @@
 package com.orangeanchorapps.shinydex.Classes
 
 import android.graphics.Bitmap
+import androidx.room.Entity
+import androidx.room.Ignore
+import androidx.room.PrimaryKey
 
-data class Pokemon (val pokemonId: Int, val pokemonName: String, val pokemonSprite: Bitmap)
+@Entity(tableName = "pokemon_table")
+data class Pokemon (
+        @PrimaryKey(autoGenerate = false)
+        var pokemonId: Int = 0,
+
+        var pokemonName: String? = "loading name.....",
+
+        @Ignore var pokemonSprite: Bitmap? = null
+){
+
+}
