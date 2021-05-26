@@ -1,6 +1,5 @@
 package com.orangeanchorapps.shinydex.Fragments
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.fragment.findNavController
 import com.orangeanchorapps.shinydex.R
+import com.orangeanchorapps.shinydex.ViewModels.SearchPokemonViewModel
 
 class SearchPokemonFragment : Fragment() {
 

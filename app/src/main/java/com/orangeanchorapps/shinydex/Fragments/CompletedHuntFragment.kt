@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.orangeanchorapps.shinydex.R
+import com.orangeanchorapps.shinydex.ViewModels.CompletedHuntViewModel
 
 class CompletedHuntFragment : Fragment() {
 

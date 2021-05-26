@@ -37,7 +37,7 @@
         tools:layout="@layout/located_pokemon_fragment" />
     <fragment
         android:id="@+id/activeHuntDetailedFragment"
-        android:name="com.orangeanchorapps.shinydex.ActiveHuntDetailedFragment"
+        android:name="com.orangeanchorapps.shinydex.Fragments.ActiveHuntDetailedFragment"
         android:label="active_hunt_detailed_fragment"
         tools:layout="@layout/active_hunt_detailed_fragment" />
 </navigation>

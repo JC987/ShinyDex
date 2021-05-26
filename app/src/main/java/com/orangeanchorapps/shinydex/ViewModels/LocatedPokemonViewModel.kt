@@ -1,12 +1,10 @@
-package com.orangeanchorapps.shinydex.Fragments
+package com.orangeanchorapps.shinydex.ViewModels
 
 import android.app.Application
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.orangeanchorapps.shinydex.Classes.Pokemon
 import com.orangeanchorapps.shinydex.Classes.ShinyHunt
@@ -17,11 +15,9 @@ import com.orangeanchorapps.shinydex.Database.PokemonRepository
 import com.orangeanchorapps.shinydex.Database.ShinyHuntRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import org.json.JSONObject
 import java.util.Random
 class LocatedPokemonViewModel(application: Application) : AndroidViewModel(application) {
     private val pokemonRepo: PokemonRepository

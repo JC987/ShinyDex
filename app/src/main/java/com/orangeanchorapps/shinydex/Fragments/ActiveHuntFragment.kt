@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.orangeanchorapps.shinydex.R
+import com.orangeanchorapps.shinydex.ViewModels.ActiveHuntViewModel
 
 class ActiveHuntFragment : Fragment() {
 

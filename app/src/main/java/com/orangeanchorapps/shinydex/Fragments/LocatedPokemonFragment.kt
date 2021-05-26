@@ -1,6 +1,5 @@
 package com.orangeanchorapps.shinydex.Fragments
 
-import android.graphics.ImageDecoder
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,10 +10,10 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.orangeanchorapps.shinydex.R
+import com.orangeanchorapps.shinydex.ViewModels.LocatedPokemonViewModel
 import kotlinx.coroutines.runBlocking
 
 class LocatedPokemonFragment : Fragment() {

@@ -1,4 +1,4 @@
-package com.orangeanchorapps.shinydex
+package com.orangeanchorapps.shinydex.ViewModels
 
 import androidx.lifecycle.ViewModel
 

@@ -1,4 +1,4 @@
-package com.orangeanchorapps.shinydex
+package com.orangeanchorapps.shinydex.Fragments
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.orangeanchorapps.shinydex.R
+import com.orangeanchorapps.shinydex.ViewModels.ActiveHuntDetailedViewModel
 
 class ActiveHuntDetailedFragment : Fragment() {
 
