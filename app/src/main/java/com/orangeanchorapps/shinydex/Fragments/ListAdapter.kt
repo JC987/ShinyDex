@@ -1,5 +1,6 @@
 package com.orangeanchorapps.shinydex.Fragments
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,7 +25,12 @@ class ListAdapter(findNavController: NavController) : RecyclerView.Adapter<ListA
             itemView.findViewById<TextView>(R.id.tvItemEncounters).text = pokemonShinyHunt.encounters.toString()
 
             itemView.setOnClickListener {
-                    navController.navigate(R.id.action_activeHuntFragment_to_activeHuntDetailedFragment)
+                val bundle = Bundle()
+                bundle.putInt("id", pokemonShinyHunt.id)
+                bundle.putString("name", pokemonShinyHunt.pokemonName)
+                bundle.putInt("pokemonId", pokemonShinyHunt.pokemonId)
+                bundle.putInt("encounters", pokemonShinyHunt.encounters)
+                navController.navigate(R.id.action_activeHuntFragment_to_activeHuntDetailedFragment, bundle)
             }
         }
     }
