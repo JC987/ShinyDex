@@ -2,6 +2,7 @@ package com.orangeanchorapps.shinydex.DAO
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.orangeanchorapps.shinydex.Classes.PokemonShinyHunt
 import com.orangeanchorapps.shinydex.Classes.ShinyHunt
 
 @Dao
@@ -21,6 +22,9 @@ interface ShinyHuntDAO {
 
     @Query("SELECT * FROM shiny_hunt WHERE isActive == 0")
     fun getAllCompletedShinyHunts():LiveData<List<ShinyHunt>>
+
+    @Query("SELECT s.id as id, p.pokemonId as pokemonId, p.pokemonName as pokemonName, s.encounters, s.isActive FROM shiny_hunt AS s INNER JOIN pokemon_table AS p ON s.pokemonId = p.pokemonId WHERE s.isActive == 1")
+    fun getActiveHuntsWithPokemon(): LiveData<List<PokemonShinyHunt>>
 }
 
 

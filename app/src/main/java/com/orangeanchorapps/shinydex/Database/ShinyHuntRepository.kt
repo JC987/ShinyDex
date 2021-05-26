@@ -5,7 +5,7 @@ import com.orangeanchorapps.shinydex.DAO.ShinyHuntDAO
 
 class ShinyHuntRepository(val shinyHuntDAO: ShinyHuntDAO) {
 
-    val activeShinyHunts = shinyHuntDAO.getAllActiveShinyHunts()
+    val activeShinyHunts = shinyHuntDAO.getActiveHuntsWithPokemon()
     val completedShinyHunts = shinyHuntDAO.getAllCompletedShinyHunts()
 
     suspend fun addShinyHunt(shinyHunt: ShinyHunt){

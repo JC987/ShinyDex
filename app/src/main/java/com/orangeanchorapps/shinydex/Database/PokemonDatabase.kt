@@ -9,7 +9,7 @@ import com.orangeanchorapps.shinydex.Classes.ShinyHunt
 import com.orangeanchorapps.shinydex.DAO.PokemonDAO
 import com.orangeanchorapps.shinydex.DAO.ShinyHuntDAO
 
-@Database(entities = [Pokemon::class, ShinyHunt::class], version = 1)
+@Database(entities = [Pokemon::class, ShinyHunt::class], version = 2)
 
 abstract class PokemonDatabase : RoomDatabase() {
     abstract fun pokemonDAO(): PokemonDAO

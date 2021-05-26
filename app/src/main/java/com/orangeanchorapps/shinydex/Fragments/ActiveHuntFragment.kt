@@ -6,13 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.orangeanchorapps.shinydex.R
 
 class ActiveHuntFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = ActiveHuntFragment()
-    }
+
 
     private lateinit var viewModel: ActiveHuntViewModel
 
@@ -20,13 +21,24 @@ class ActiveHuntFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.active_hunt_fragment, container, false)
+        val view = inflater.inflate(R.layout.active_hunt_fragment, container, false)
+        viewModel = ViewModelProvider(this).get(ActiveHuntViewModel::class.java)
+
+        val rv = view.findViewById<RecyclerView>(R.id.rvActive)
+        val adapter = ListAdapter(findNavController())
+        rv.adapter = adapter
+        rv.layoutManager = LinearLayoutManager(view.context)
+
+        viewModel.activeShinyHunts.observe(viewLifecycleOwner,{
+            adapter.setData(it)
+            adapter.notifyDataSetChanged()
+        })
+
+
+
+        return view
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ActiveHuntViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
+
 
 }
