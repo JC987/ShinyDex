@@ -20,7 +20,11 @@
         android:id="@+id/completedHuntFragment"
         android:name="com.orangeanchorapps.shinydex.Fragments.CompletedHuntFragment"
         android:label="Completed"
-        tools:layout="@layout/completed_hunt_fragment" />
+        tools:layout="@layout/completed_hunt_fragment" >
+        <action
+            android:id="@+id/action_completedHuntFragment_to_completedHuntDetailedFragment"
+            app:destination="@id/completedHuntDetailedFragment" />
+    </fragment>
     <fragment
         android:id="@+id/searchPokemonFragment"
         android:name="com.orangeanchorapps.shinydex.Fragments.SearchPokemonFragment"
@@ -38,6 +42,11 @@
     <fragment
         android:id="@+id/activeHuntDetailedFragment"
         android:name="com.orangeanchorapps.shinydex.Fragments.ActiveHuntDetailedFragment"
-        android:label="active_hunt_detailed_fragment"
+        android:label="Active Hunt"
         tools:layout="@layout/active_hunt_detailed_fragment" />
+    <fragment
+        android:id="@+id/completedHuntDetailedFragment"
+        android:name="com.orangeanchorapps.shinydex.Fragments.CompletedHuntDetailedFragment"
+        android:label="Completed Hunt"
+        tools:layout="@layout/completed_hunt_detailed_fragment" />
 </navigation>

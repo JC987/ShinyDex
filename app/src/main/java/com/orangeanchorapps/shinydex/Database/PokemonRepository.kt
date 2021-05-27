@@ -32,7 +32,7 @@ class PokemonRepository(val pokemonDAO: PokemonDAO) {
 
     }
 
-    fun fetchPokemonSprite(client: OkHttpClient, request: Request): Bitmap {
+    suspend fun fetchPokemonSprite(client: OkHttpClient, request: Request): Bitmap {
         val response = client.newCall(request).execute()
         val body = response.body
         val byteStream = body?.byteStream()

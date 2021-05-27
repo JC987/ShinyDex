@@ -62,4 +62,11 @@ class ActiveHuntDetailedViewModel(application: Application) : AndroidViewModel(a
             encounters.value = shinyHunt.encounters
         }
     }
+
+    fun finishShinyHuny() {
+        shinyHunt.isActive = false
+        viewModelScope.launch(Dispatchers.IO) {
+            shinyHuntRepository.updateShinyHunt(shinyHunt)
+        }
+    }
 }

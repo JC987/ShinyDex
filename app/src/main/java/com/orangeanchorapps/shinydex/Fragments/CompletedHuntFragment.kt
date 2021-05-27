@@ -6,14 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.orangeanchorapps.shinydex.R
 import com.orangeanchorapps.shinydex.ViewModels.CompletedHuntViewModel
 
 class CompletedHuntFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = CompletedHuntFragment()
-    }
 
     private lateinit var viewModel: CompletedHuntViewModel
 
@@ -21,13 +21,20 @@ class CompletedHuntFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.completed_hunt_fragment, container, false)
+        val view = inflater.inflate(R.layout.completed_hunt_fragment, container, false)
+        viewModel = ViewModelProvider(this).get(CompletedHuntViewModel::class.java)
+
+        val rv = view.findViewById<RecyclerView>(R.id.rvCompleted)
+        val adapter = ListAdapter(findNavController = findNavController())
+        rv.adapter = adapter
+        rv.layoutManager = LinearLayoutManager(view.context)
+
+        viewModel.getAllCompleted.observe(viewLifecycleOwner){
+            adapter.setData(it)
+            adapter.notifyDataSetChanged()
+        }
+        return view
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(CompletedHuntViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
 
 }

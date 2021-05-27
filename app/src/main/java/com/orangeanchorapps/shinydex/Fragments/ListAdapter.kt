@@ -25,13 +25,29 @@ class ListAdapter(findNavController: NavController) : RecyclerView.Adapter<ListA
             itemView.findViewById<TextView>(R.id.tvItemEncounters).text = pokemonShinyHunt.encounters.toString()
 
             itemView.setOnClickListener {
-                val bundle = Bundle()
-                bundle.putInt("id", pokemonShinyHunt.id)
-                bundle.putString("name", pokemonShinyHunt.pokemonName)
-                bundle.putInt("pokemonId", pokemonShinyHunt.pokemonId)
-                bundle.putInt("encounters", pokemonShinyHunt.encounters)
-                navController.navigate(R.id.action_activeHuntFragment_to_activeHuntDetailedFragment, bundle)
+                if(pokemonShinyHunt.isActive)
+                    activeItemClicked(pokemonShinyHunt, navController)
+                else
+                    completedItemClicked(pokemonShinyHunt, navController)
             }
+        }
+
+        private fun completedItemClicked(pokemonShinyHunt: PokemonShinyHunt, navController: NavController) {
+            val bundle = Bundle()
+            bundle.putInt("id", pokemonShinyHunt.id)
+            bundle.putInt("pokemonId", pokemonShinyHunt.pokemonId)
+            bundle.putInt("encounters", pokemonShinyHunt.encounters)
+            bundle.putString("name", pokemonShinyHunt.pokemonName)
+            navController.navigate(R.id.action_completedHuntFragment_to_completedHuntDetailedFragment, bundle)
+        }
+
+        private fun activeItemClicked(pokemonShinyHunt: PokemonShinyHunt, navController: NavController) {
+            val bundle = Bundle()
+            bundle.putInt("id", pokemonShinyHunt.id)
+            bundle.putString("name", pokemonShinyHunt.pokemonName)
+            bundle.putInt("pokemonId", pokemonShinyHunt.pokemonId)
+            bundle.putInt("encounters", pokemonShinyHunt.encounters)
+            navController.navigate(R.id.action_activeHuntFragment_to_activeHuntDetailedFragment, bundle)
         }
     }
 
