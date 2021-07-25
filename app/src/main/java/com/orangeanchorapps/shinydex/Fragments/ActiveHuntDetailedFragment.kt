@@ -36,8 +36,6 @@ class ActiveHuntDetailedFragment : Fragment() {
         val pokemonId = requireArguments().getInt("pokemonId")
         val name = requireArguments().getString("name")
         val encounters = requireArguments().getInt("encounters")
-        val shinyHunt = ShinyHunt(id = id, pokemonId = pokemonId, encounters = encounters)
-
         val tvName = view.findViewById<TextView>(R.id.tvPokemonName)
         val tvEncounters = view.findViewById<TextView>(R.id.tvEncounters)
         val imageView = view.findViewById<ImageView>(R.id.imageView)
@@ -50,8 +48,11 @@ class ActiveHuntDetailedFragment : Fragment() {
         val temp = "Encounters: $encounters"
         tvEncounters.text =  temp
 
-
-        viewModel.setShinyHunt(shinyHunt)
+        // when the id is zero it is an empty shiny hunt and has not been loaded
+        if (viewModel.shinyHunt.value?.id == 0) {
+            val shinyHunt = ShinyHunt(id = id, pokemonId = pokemonId, encounters = encounters)
+            viewModel.setShinyHunt(shinyHunt)
+        }
 
         viewModel.encounters.observe(viewLifecycleOwner, {
             val temp = "Encounters: $it"

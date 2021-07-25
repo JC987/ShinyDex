@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 
         //allows the action bar to change title with fragments
         val actionBarController = AppBarConfiguration(setOf(R.id.activeHuntFragment, R.id.completedHuntFragment, R.id.searchPokemonFragment))
-
+7
         setupActionBarWithNavController(navController, actionBarController)
 
         //add nav contoller to nav view

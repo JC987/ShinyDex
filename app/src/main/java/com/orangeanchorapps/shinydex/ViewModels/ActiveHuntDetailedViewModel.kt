@@ -19,7 +19,7 @@ class ActiveHuntDetailedViewModel(application: Application) : AndroidViewModel(a
     private val _bitmap = MutableLiveData<Bitmap>()
     var bitmap = _bitmap
 
-    private lateinit var shinyHunt: ShinyHunt
+    var shinyHunt = MutableLiveData<ShinyHunt>(ShinyHunt())
     private val shinyHuntRepository : ShinyHuntRepository
     private val pokemonRepository: PokemonRepository
     init {
@@ -30,12 +30,12 @@ class ActiveHuntDetailedViewModel(application: Application) : AndroidViewModel(a
     }
 
     fun setShinyHunt(sh : ShinyHunt){
-        shinyHunt = sh
-        encounters.value = shinyHunt.encounters
+        shinyHunt.value = sh
+        encounters.value = shinyHunt.value!!.encounters
 
         val client = OkHttpClient()
         val request = Request.Builder().run {
-            url("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${shinyHunt.pokemonId}.png")
+            url("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${shinyHunt.value!!.pokemonId}.png")
             build()
         }
 
@@ -47,26 +47,26 @@ class ActiveHuntDetailedViewModel(application: Application) : AndroidViewModel(a
     }
 
     fun addOne(){
-        shinyHunt.encounters += 1
+        shinyHunt.value!!.encounters += 1
         viewModelScope.launch(Dispatchers.IO) {
-            shinyHuntRepository.updateShinyHunt(shinyHunt)
+            shinyHuntRepository.updateShinyHunt(shinyHunt.value!!)
         }
-        encounters.value = shinyHunt.encounters
+        encounters.value = shinyHunt.value!!.encounters
     }
     fun subOne(){
         if(encounters.value != 0){
-            shinyHunt.encounters -= 1
+            shinyHunt.value!!.encounters -= 1
             viewModelScope.launch(Dispatchers.IO) {
-                shinyHuntRepository.updateShinyHunt(shinyHunt)
+                shinyHuntRepository.updateShinyHunt(shinyHunt.value!!)
             }
-            encounters.value = shinyHunt.encounters
+            encounters.value = shinyHunt.value!!.encounters
         }
     }
 
     fun finishShinyHuny() {
-        shinyHunt.isActive = false
+        shinyHunt.value!!.isActive = false
         viewModelScope.launch(Dispatchers.IO) {
-            shinyHuntRepository.updateShinyHunt(shinyHunt)
+            shinyHuntRepository.updateShinyHunt(shinyHunt.value!!)
         }
     }
 }
