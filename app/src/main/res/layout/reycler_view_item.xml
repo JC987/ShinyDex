@@ -15,6 +15,7 @@
         android:layout_marginBottom="16dp"
         android:text="Pokemon Name!"
         android:textSize="18sp"
+        android:textAppearance="@style/textview"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tvItemEncounters"
         app:layout_constraintHorizontal_bias="0"
@@ -31,6 +32,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:text="Encounters"
+        android:textAppearance="@style/textview"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

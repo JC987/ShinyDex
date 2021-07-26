@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.orangeanchorapps.shinydex.R
@@ -33,6 +34,9 @@ class CompletedHuntFragment : Fragment() {
             adapter.setData(it)
             adapter.notifyDataSetChanged()
         }
+
+        rv.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
+
         return view
     }
 
