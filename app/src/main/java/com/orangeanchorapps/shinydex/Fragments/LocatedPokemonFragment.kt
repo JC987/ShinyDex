@@ -6,10 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.ProgressBar
-import android.widget.TextView
+import android.widget.*
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.graphics.drawable.toBitmap
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.orangeanchorapps.shinydex.R
@@ -31,6 +30,7 @@ class LocatedPokemonFragment : Fragment() {
         val imageView = view.findViewById<ImageView>(R.id.imageView)
         val tvName = view.findViewById<TextView>(R.id.tvPokemonName)
         val pb = view.findViewById<ProgressBar>(R.id.progressBar)
+        val btnRefresh = view.findViewById<Button>(R.id.btnRefresh)
 
         viewModel.pokemonName.observe(viewLifecycleOwner, {
             tvName.text = it
@@ -40,6 +40,24 @@ class LocatedPokemonFragment : Fragment() {
                 pb.visibility = View.GONE
             imageView.setImageBitmap(it)
         })
+
+        viewModel.errorLoading.observe(viewLifecycleOwner) {
+            if (it) {
+                pb.visibility = View.GONE
+                btnRefresh.visibility = View.VISIBLE
+                imageView.setImageBitmap(AppCompatResources.getDrawable(requireContext(), R.drawable.ic_baseline_error_24)?.toBitmap())
+                tvName.text = "Error loading Pokemon"
+                Toast.makeText(requireContext(), "Error loading Pokemon", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        btnRefresh.setOnClickListener {
+            imageView.setImageBitmap(null)
+            tvName.text = "Loading..."
+            pb.visibility = View.VISIBLE
+            btnRefresh.visibility = View.GONE
+            viewModel.loadPokemon()
+        }
 
         btn.setOnClickListener {
             Snackbar.make(view,"Adding new Shiny Hunt!",Snackbar.LENGTH_SHORT).show()

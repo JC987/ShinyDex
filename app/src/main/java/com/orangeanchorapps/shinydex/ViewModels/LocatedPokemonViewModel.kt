@@ -18,6 +18,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import java.lang.Exception
 import java.util.Random
 class LocatedPokemonViewModel(application: Application) : AndroidViewModel(application) {
     private val pokemonRepo: PokemonRepository
@@ -26,7 +27,7 @@ class LocatedPokemonViewModel(application: Application) : AndroidViewModel(appli
     private val shinyHuntRepo: ShinyHuntRepository
     private val ranNum:Int
 
-
+    var errorLoading = MutableLiveData<Boolean>(false)
     private val _bitmap = MutableLiveData<Bitmap>()
     var bitmap = _bitmap
 
@@ -43,8 +44,7 @@ class LocatedPokemonViewModel(application: Application) : AndroidViewModel(appli
 
         val r = Random()
         ranNum = r.nextInt(896)
-        loadImage()
-        loadName()
+        loadPokemon()
     }
 
 
@@ -71,10 +71,18 @@ class LocatedPokemonViewModel(application: Application) : AndroidViewModel(appli
         }
 
         viewModelScope.launch(Dispatchers.IO) {
-            pokemonName.postValue(pokemonRepo.fetchPokemonName(client,request))
+            try {
+                pokemonName.postValue(pokemonRepo.fetchPokemonName(client,request))
+            } catch (e: Exception) {
+                errorLoading.postValue(true)
+            }
         }
     }
 
+    fun loadPokemon(){
+        loadName()
+        loadImage()
+    }
 
     private fun loadImage() {
 
@@ -86,8 +94,12 @@ class LocatedPokemonViewModel(application: Application) : AndroidViewModel(appli
         }
 
         viewModelScope.launch(Dispatchers.IO) {
-            bitmap.postValue(pokemonRepo.fetchPokemonSprite(client, request))
-            Log.d("loadpokemon", "load: $ranNum" )
+            try {
+                bitmap.postValue(pokemonRepo.fetchPokemonSprite(client, request))
+                Log.d("loadpokemon", "load: $ranNum")
+            } catch(e: Exception) {
+                errorLoading.postValue(true)
+            }
         }
 
     }

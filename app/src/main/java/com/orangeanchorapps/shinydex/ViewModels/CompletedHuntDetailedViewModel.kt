@@ -11,12 +11,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import java.lang.Exception
 
 class CompletedHuntDetailedViewModel(application: Application) : AndroidViewModel(application) {
     val pokemonRepository : PokemonRepository
     private val _bitmap = MutableLiveData<Bitmap>()
     val bitmap = _bitmap
 
+    var errorLoadingSprite = MutableLiveData<Boolean>(false)
     init {
         val pokemonDAO = PokemonDatabase.getDatabase(application.applicationContext)!!.pokemonDAO()
 
@@ -32,7 +34,12 @@ class CompletedHuntDetailedViewModel(application: Application) : AndroidViewMode
                 url("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/$pokemonId.png")
                 build()
             }
-            bitmap.postValue(pokemonRepository.fetchPokemonSprite(client, request))
+
+            try {
+                bitmap.postValue(pokemonRepository.fetchPokemonSprite(client, request))
+            } catch (e: Exception) {
+                errorLoadingSprite.postValue(true)
+            }
         }
     }
 }

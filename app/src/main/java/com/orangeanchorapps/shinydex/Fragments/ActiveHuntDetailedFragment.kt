@@ -10,6 +10,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.graphics.drawable.toBitmap
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.orangeanchorapps.shinydex.Classes.ShinyHunt
@@ -42,6 +44,7 @@ class ActiveHuntDetailedFragment : Fragment() {
         val pb = view.findViewById<ProgressBar>(R.id.progressBar)
         val btnAddOne = view.findViewById<Button>(R.id.btnAddOne)
         val btnSubOne = view.findViewById<Button>(R.id.btnSubOne)
+        val btnRefresh = view.findViewById<Button>(R.id.btnRefresh)
         val btnFinish = view.findViewById<Button>(R.id.btnFinishShinyHunt)
 
         tvName.text = name
@@ -64,6 +67,14 @@ class ActiveHuntDetailedFragment : Fragment() {
                 pb.visibility = View.GONE
             }
         })
+        viewModel.errorLoadingSprite.observe(viewLifecycleOwner) {
+            if (it == true) {
+                pb.visibility = View.GONE
+                imageView.setImageBitmap(AppCompatResources.getDrawable(requireContext(), R.drawable.ic_baseline_error_24)?.toBitmap())
+                Toast.makeText(requireContext(), "Error Loading Image...", Toast.LENGTH_SHORT).show()
+                btnRefresh.visibility = View.VISIBLE
+            }
+        }
 
         btnFinish.setOnClickListener {
             val dialog = AlertDialog.Builder(c).run {
@@ -86,6 +97,14 @@ class ActiveHuntDetailedFragment : Fragment() {
         }
         btnSubOne.setOnClickListener {
             viewModel.subOne()
+        }
+        btnRefresh.setOnClickListener {
+            pb.visibility = View.VISIBLE
+            imageView.setImageBitmap(null)
+            btnRefresh.visibility = View.GONE
+
+            val shinyHunt = ShinyHunt(id = id, pokemonId = pokemonId, encounters = encounters)
+            viewModel.setShinyHunt(shinyHunt)
         }
         return view
     }

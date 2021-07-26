@@ -6,9 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.ProgressBar
-import android.widget.TextView
+import android.widget.*
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.graphics.drawable.toBitmap
 import com.orangeanchorapps.shinydex.R
 import com.orangeanchorapps.shinydex.ViewModels.CompletedHuntDetailedViewModel
 
@@ -29,6 +29,7 @@ class CompletedHuntDetailedFragment : Fragment() {
         val tvName = view.findViewById<TextView>(R.id.tvPokemonName)
         val imageView = view.findViewById<ImageView>(R.id.imageView)
         val pb = view.findViewById<ProgressBar>(R.id.progressBar)
+        val btnRefresh = view.findViewById<Button>(R.id.btnRefresh)
 
         val tvEncounters = view.findViewById<TextView>(R.id.tvCompletedEncounters)
 
@@ -43,6 +44,22 @@ class CompletedHuntDetailedFragment : Fragment() {
                 pb.visibility = View.GONE
                 imageView.setImageBitmap(it)
             }
+        }
+
+        viewModel.errorLoadingSprite.observe(viewLifecycleOwner) {
+            if (it) {
+                btnRefresh.visibility = View.VISIBLE
+                pb.visibility = View.GONE
+                imageView.setImageBitmap(AppCompatResources.getDrawable(requireContext(), R.drawable.ic_baseline_error_24)?.toBitmap())
+                Toast.makeText(requireContext(), "Error loading Image", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        btnRefresh.setOnClickListener {
+            btnRefresh.visibility = View.GONE
+            pb.visibility = View.VISIBLE
+            imageView.setImageBitmap(null)
+            viewModel.loadImage(pokemonId)
         }
 
         return view

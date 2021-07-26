@@ -2,6 +2,7 @@ package com.orangeanchorapps.shinydex.ViewModels
 
 import android.app.Application
 import android.graphics.Bitmap
+import android.util.Log
 import androidx.lifecycle.*
 import com.orangeanchorapps.shinydex.Classes.ShinyHunt
 import com.orangeanchorapps.shinydex.Database.PokemonDatabase
@@ -18,6 +19,8 @@ class ActiveHuntDetailedViewModel(application: Application) : AndroidViewModel(a
 
     private val _bitmap = MutableLiveData<Bitmap>()
     var bitmap = _bitmap
+
+    var errorLoadingSprite = MutableLiveData<Boolean>(false)
 
     var shinyHunt = MutableLiveData<ShinyHunt>(ShinyHunt())
     private val shinyHuntRepository : ShinyHuntRepository
@@ -40,8 +43,13 @@ class ActiveHuntDetailedViewModel(application: Application) : AndroidViewModel(a
         }
 
         viewModelScope.launch(Dispatchers.IO) {
-            
-            bitmap.postValue(pokemonRepository.fetchPokemonSprite(client, request))
+
+            try {
+                bitmap.postValue(pokemonRepository.fetchPokemonSprite(client, request))
+            } catch (e: Exception) {
+                Log.i("TAG", "setShinyHunt: ${e.message}")
+                errorLoadingSprite.postValue(true)
+            }
 
         }
     }
