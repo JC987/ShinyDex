@@ -102,9 +102,7 @@ class ActiveHuntDetailedFragment : Fragment() {
             pb.visibility = View.VISIBLE
             imageView.setImageBitmap(null)
             btnRefresh.visibility = View.GONE
-
-            val shinyHunt = ShinyHunt(id = id, pokemonId = pokemonId, encounters = encounters)
-            viewModel.setShinyHunt(shinyHunt)
+            viewModel.setShinyHunt(viewModel.shinyHunt.value!!)
         }
         return view
     }

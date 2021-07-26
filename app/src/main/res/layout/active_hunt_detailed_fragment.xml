@@ -7,6 +7,19 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.ActiveHuntDetailedFragment">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="128dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
 
     <include
         android:id="@+id/includeActiveHuntDetailed"
@@ -40,9 +53,8 @@
         android:layout_height="wrap_content"
         android:text="Add 1"
         android:layout_marginTop="24dp"
+        android:layout_marginEnd="64dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/tvEncounters"
         app:layout_constraintTop_toBottomOf="@+id/tvEncounters" />
 
 
@@ -52,24 +64,27 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="Sub 1"
-        app:layout_constraintEnd_toStartOf="@+id/tvEncounters"
-        app:layout_constraintHorizontal_bias="1.0"
+        android:layout_marginStart="64dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvEncounters" />
 
 
 
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
     <Button
         android:id="@+id/btnFinishShinyHunt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="64dp"
+
         android:layout_marginBottom="64dp"
         android:text="Finish Shiny Hunt"
         app:layout_constraintVertical_bias="1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSubOne" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
