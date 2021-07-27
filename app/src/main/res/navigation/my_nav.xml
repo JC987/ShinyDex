@@ -49,4 +49,5 @@
         android:name="com.orangeanchorapps.shinydex.Fragments.CompletedHuntDetailedFragment"
         android:label="Completed Hunt"
         tools:layout="@layout/completed_hunt_detailed_fragment" />
+
 </navigation>

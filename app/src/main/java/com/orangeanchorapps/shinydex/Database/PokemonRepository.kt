@@ -40,6 +40,18 @@ class PokemonRepository(val pokemonDAO: PokemonDAO) {
 
     }
 
+    suspend fun fetchPokemonNameAndId(client:OkHttpClient, request: Request):Pair<String, Int> {
+
+        val response = client.newCall(request).execute()
+        Log.i("loadPokemon", "fetchPokemonName: ")
+        val jsonObject = JSONObject(response.body!!.string())
+        val name = jsonObject.getString("name")
+        val pid = jsonObject.getString("id").toInt()
+        Log.d("loadPokemon", "loadName: $name - $pid")
+        return Pair(name, pid)
+
+    }
+
     suspend fun fetchPokemonSprite(client: OkHttpClient, request: Request): Bitmap? {
         Log.i("TAG", "fetchPokemonSprite: ")
         var byteStream : InputStream? = null

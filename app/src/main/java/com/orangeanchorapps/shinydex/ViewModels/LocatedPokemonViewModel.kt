@@ -3,6 +3,7 @@ package com.orangeanchorapps.shinydex.ViewModels
 import android.app.Application
 import android.graphics.Bitmap
 import android.util.Log
+import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -25,7 +26,7 @@ class LocatedPokemonViewModel(application: Application) : AndroidViewModel(appli
     private val pokemonDAO: PokemonDAO
     private val shinyHuntDAO: ShinyHuntDAO
     private val shinyHuntRepo: ShinyHuntRepository
-    private val ranNum:Int
+    private var pokemonId = MutableLiveData<Int>(1)
 
     var errorLoading = MutableLiveData<Boolean>(false)
     private val _bitmap = MutableLiveData<Bitmap>()
@@ -33,6 +34,7 @@ class LocatedPokemonViewModel(application: Application) : AndroidViewModel(appli
 
     private val _pokemonName = MutableLiveData<String>()
     var pokemonName = _pokemonName
+    var pokemonPair = MutableLiveData<Pair<String,Int>>()
 
     init {
 
@@ -42,16 +44,13 @@ class LocatedPokemonViewModel(application: Application) : AndroidViewModel(appli
         pokemonRepo = PokemonRepository(pokemonDAO)
         shinyHuntRepo = ShinyHuntRepository(shinyHuntDAO)
 
-        val r = Random()
-        ranNum = r.nextInt(896)
-        loadPokemon()
     }
 
 
-    /*private fun loadName(ranNum: Int) {
+    /*private fun loadName(pokemonId: Int) {
         val client = OkHttpClient()
         val request = Request.Builder().run{
-            url("https://pokeapi.co/api/v2/pokemon/$ranNum")
+            url("https://pokeapi.co/api/v2/pokemon/$pokemonId")
             build()
         }
 
@@ -63,10 +62,16 @@ class LocatedPokemonViewModel(application: Application) : AndroidViewModel(appli
             pokemonName.postValue(name)
         }
     }*/
+
+    fun loadRandom(){
+        val r = Random()
+        pokemonId.value = r.nextInt(896)
+        loadPokemon()
+    }
     private fun loadName() {
         val client = OkHttpClient()
         val request = Request.Builder().run {
-            url("https://pokeapi.co/api/v2/pokemon/$ranNum")
+            url("https://pokeapi.co/api/v2/pokemon/${pokemonId.value}")
             build()
         }
 
@@ -89,14 +94,14 @@ class LocatedPokemonViewModel(application: Application) : AndroidViewModel(appli
 
         val client = OkHttpClient()
         val request = Request.Builder().run {
-            url("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/$ranNum.png")
+            url("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${pokemonId.value}.png")
             build()
         }
 
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 bitmap.postValue(pokemonRepo.fetchPokemonSprite(client, request))
-                Log.d("loadpokemon", "load: $ranNum")
+                Log.d("loadpokemon", "load: ${pokemonId.value}")
             } catch(e: Exception) {
                 errorLoading.postValue(true)
             }
@@ -104,10 +109,31 @@ class LocatedPokemonViewModel(application: Application) : AndroidViewModel(appli
 
     }
 
-    fun addToDatabase(): Job {
-        val p = Pokemon(pokemonId = ranNum, pokemonName = pokemonName.value, pokemonSprite = bitmap.value )
+    private fun loadPokemon(input: String){
+        loadName(input)
+    }
 
-        val sh = ShinyHunt(id= 0, pokemonId = ranNum, isActive = true, encounters = 0)
+    private fun loadName(input: String) {
+        val client = OkHttpClient()
+        val request = Request.Builder().run {
+            url("https://pokeapi.co/api/v2/pokemon/$input")
+            build()
+        }
+
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                pokemonPair.postValue(pokemonRepo.fetchPokemonNameAndId(client,request))
+            } catch (e: Exception) {
+                Log.i("TAG", "loadName: $e")
+                errorLoading.postValue(true)
+            }
+        }
+    }
+
+    fun addToDatabase(): Job {
+        val p = Pokemon(pokemonId = pokemonId.value!!, pokemonName = pokemonName.value, pokemonSprite = bitmap.value )
+
+        val sh = ShinyHunt(id= 0, pokemonId = pokemonId.value!!, isActive = true, encounters = 0)
 
         val job = viewModelScope.launch (Dispatchers.IO) {
             pokemonRepo.addPokemon(p)
@@ -115,5 +141,20 @@ class LocatedPokemonViewModel(application: Application) : AndroidViewModel(appli
 
         }
         return job
+    }
+
+    fun loadInput(input: String) {
+        if (input.isDigitsOnly()) {
+            pokemonId.value = input.toInt()
+            loadPokemon()
+        } else {
+            loadPokemon(input.toLowerCase())
+        }
+    }
+
+    fun usePair(it: Pair<String, Int>) {
+        pokemonName.value = it.first
+        pokemonId.value = it.second!!
+        loadImage()
     }
 }

@@ -51,6 +51,11 @@ class LocatedPokemonFragment : Fragment() {
             }
         }
 
+        viewModel.pokemonPair.observe(viewLifecycleOwner) {
+            if (it != null) {
+                viewModel.usePair(it)
+            }
+        }
         btnRefresh.setOnClickListener {
             imageView.setImageBitmap(null)
             tvName.text = "Loading..."
@@ -67,6 +72,14 @@ class LocatedPokemonFragment : Fragment() {
             }
 
             findNavController().navigateUp()
+        }
+
+        val input:String? = arguments?.getString("input")
+
+        if (input.isNullOrEmpty()) {
+            viewModel.loadRandom()
+        } else {
+            viewModel.loadInput(input)
         }
 
         return view
